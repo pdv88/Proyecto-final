@@ -1,0 +1,565 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200;0,400;0,700;1,200;1,400;1,700&family=Markazi+Text:wght@400;500;600;700&display=swap');
+
+:root{
+  /* Primary Colors */
+  --green900: #495E57;
+  --green900_50:#495e57b8;
+  --yellow900: #F4CE14;
+  --yellow700: #c8a90f;
+  /* Secondary Colors */
+  --beige900: #EE9972;
+  --beige500: #FBDABB;
+  --white900: #EDEFEE;
+  --white900_50: #edefee7e;
+  --black900: #333333;
+  --error:rgb(220, 56, 56);
+  /* widths & heights */
+  --maxContainerWidth:900px;
+  --headerHeight: 4.5rem;
+}
+*{
+  box-sizing: border-box;
+  color: var(--black900);
+  font-family: 'Karla', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+::-webkit-scrollbar{
+  width: .7rem;
+}
+::-webkit-scrollbar-thumb{
+  background: var(--green900);
+  opacity: 50%;
+  border-radius: .5rem;
+  transition: all 300ms;
+  box-shadow: inset 0px 0px 5px rgb(50, 50, 50);
+}
+::-webkit-scrollbar-thumb:hover{
+  opacity: 100%;
+  transition: all 300ms;
+}
+::-webkit-scrollbar-track{
+  background: var(--white900_50);
+}
+
+button{
+  background-color: var(--yellow900);
+  font-family: 'Markazi Text', serif;
+  font-weight: bold;
+  font-size: 1.2rem;
+  width: fit-content;
+  padding: .5rem 1rem;
+  border: none;
+  outline: none;
+  border-radius: 1rem;
+  transition: all 300ms;
+}
+button:hover{
+  background-color: var(--yellow700);
+  cursor: pointer;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.199);
+  transition: all 300ms;
+}
+.secondaryButton{
+  background-color: transparent;
+}
+.secondaryButton:hover{
+  background-color: transparent;
+  box-shadow: none;
+}
+h1{
+  font-family: 'Markazi Text', serif;
+  color: var(--yellow900);
+  font-size: 4rem;
+  line-height: 4rem;
+}
+label{
+  color: var(--white900);
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+input, select{
+  padding: .5rem 1rem;
+  font-size: 1.2rem;
+  border-radius: .5rem;
+  border: none;
+  background-color: var(--white900_50);
+  color: var(--black900);
+}
+input:focus, .bookingForm select:focus{
+  outline: 2px solid var(--yellow900);
+}
+.icons{
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: .5rem;
+}
+
+/* --------------------------Header--------------------------- */
+
+header{
+  display: flex;
+  justify-content: center;
+  height: var(--headerHeight);
+  box-shadow: 0px 0px 20px rgb(0, 0, 0);
+  z-index: 2;
+}
+header .container{
+  display: flex;
+  justify-content: space-between;
+  max-width: var(--maxContainerWidth);
+  width: 100%;
+  padding: 1rem;
+  justify-self: center;
+}
+ul{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+li{
+  list-style: none;
+  font-weight: bold;
+  text-align: center;
+}
+li:hover{
+  color: var(--green900);
+}
+nav{
+  align-self: center;
+}
+nav a:hover{
+  background-color: #f4cf14;
+  transition: all 300ms;
+}
+nav a{
+  text-decoration: none;
+  background-color: #f4cf1400;
+  transition: all 300ms;
+  padding: .5rem 1rem;
+  border-radius: .5rem;
+}
+.burger{
+  display: none;
+  cursor: pointer;
+}
+.burgerMenu{
+  display: flex;
+  z-index: 1;
+  position: fixed;
+  top: var(--headerHeight);
+  text-align: center;
+  justify-self: flex-end;
+  background-color: var(--white900_50);
+  backdrop-filter: blur(10px);
+  width: 100%;
+  padding: 1rem;
+  justify-content: center;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
+  border-radius: 0 0 1rem 1rem;
+  animation-name: menuSlideIn;
+  animation-duration: 300ms;
+}
+.burgerMenu ul{
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem;
+  font-size: 1.5rem;
+}
+.burgerMenu a{
+  font-family: 'Markazi Text', serif;
+}
+
+@media screen and (max-width: 750px){
+  .burger{
+    display: block;
+  }
+  header .container nav{
+    display: none;
+  }
+}
+
+@keyframes menuSlideIn {
+  from {
+    transform: translateY(-300px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* --------------------------Hero------------------------------ */
+
+#hero{
+  display: flex;
+  width: 100%;
+  background-color: var(--green900);
+  justify-content: center;
+  margin-bottom: 5rem;
+}
+#hero .container{
+  color: var(--white900);
+  width: 100%;
+  display: flex;
+  padding: 1rem;
+  gap: 1rem;
+  justify-content: space-between;
+  max-width: var(--maxContainerWidth);
+}
+.hero__datos{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 20rem;
+}
+#hero h2{
+  font-family: 'Markazi Text', serif;
+  font-size: 2.5rem;
+  color: var(--white900);
+}
+#hero img{
+  width: 20rem;
+  height: 20rem;
+  object-fit:cover;
+  border-radius: 1rem;
+  position: relative;
+  bottom: -5rem;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.449);
+}
+#hero p{
+  color: var(--white900);
+  font-family: 'Markazi Text', serif;
+  font-size: 1.5rem;
+  padding: .5rem 0;
+}
+@media screen and (max-width: 576px) {
+  #hero .container{
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+
+/* -----------------------Highlights--------------------------- */
+
+.highlights{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 1rem 0;
+}
+.highlights .container{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: var(--maxContainerWidth);
+  padding: 1rem;
+}
+.title-container{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+.cards-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 1rem 0;
+  gap: 1rem;
+}
+.card{
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  border-radius: 1rem;
+  overflow: hidden;
+  background-color: var(--white900);
+  transition: all 300ms;
+  height: 400px;
+}
+.card:hover{
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.248);
+  transform: translateY(-5px);
+  transition: all 300ms;
+}
+.card-data{
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  gap: .5rem;
+  height: 100%;
+  justify-content: space-between;
+}
+.card-image{
+  width: 100%;
+  height: 165px;
+  object-fit: cover;
+}
+.card-title{
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
+}
+.card-price{
+  color: #EE9972;
+  font-weight: bold;
+}
+.card-data p{
+  height: 100%;
+}
+.card button{
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: var(--black900);
+  color: var(--white900);
+  border: none;
+  width: fit-content;
+  padding: .5rem 1rem;
+  border-radius: .5rem;
+}
+
+/* ----------------------About Us------------------------- */
+
+#about{
+  display: flex;
+  min-height: calc(100vh - var(--headerHeight));
+  justify-content: center;
+  align-items: center;
+  background-image: url(./assets/icons_assets/Mario and Adrian A.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  text-align: center;
+}
+#about .container{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: var(--maxContainerWidth);
+  background-color: var(--green900_50);
+  backdrop-filter: blur(20px); 
+  height: auto;
+  border-radius: 1rem;
+  padding: 2rem; 
+  margin: 1rem;
+}
+#about p, #about strong{
+  color: var(--white900);
+  text-align: left;
+  font-size: 1.2rem;
+  text-shadow: 0px 0px 10px var(--black900);
+}
+
+
+/* ---------------------Reservations---------------------- */
+
+#reservations{
+  display: flex;
+  background: no-repeat url(./assets/icons_assets/restaurant2.jpg) ;
+  background-size: cover;
+  min-height: calc(100vh - var(--headerHeight));
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+#reservations .container{
+  display: flex;
+  flex-direction: column;
+  max-width: 40rem;
+  justify-content: center;
+  padding: 1rem;
+  backdrop-filter: blur(5px);
+  border-radius: 1rem;
+  background-color: var(--green900_50);
+  margin: 1rem;
+}
+#reservations h1{
+  padding-bottom: 1rem;
+  align-self: center;
+}
+.bookingForm{
+  display: flex;
+  flex-direction: column;
+}
+input.submitButton{
+  margin-top: 1rem;
+  background-color: var(--yellow900);
+  cursor: pointer;
+  font-weight: bold;
+}
+input.submitButton:hover{
+  background-color: var(--yellow700);
+}
+p.formError {
+  color: var(--error);
+}
+.reservation-card{
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  background-color: var(--white900_50);
+  border-radius: .5rem;
+  gap: .5rem;
+  min-width: 18rem;
+}
+.reservation-card button{
+  align-self: center;
+} 
+.form-reservations-container{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.prevReservations{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  max-height: 100%;
+}
+
+/* ---------------------Login---------------------- */
+
+#login{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background:no-repeat center url(./assets/icons_assets/restaurant.jpg);
+  background-size: cover;
+  height: calc(100vh - var(--headerHeight));
+}
+#login .container{
+  max-width: var(--maxContainerWidth);
+  background-color: var(--green900_50);
+  border-radius: 1rem;
+  padding: 1rem;
+  backdrop-filter: blur(10px);
+}
+.loginForm{
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+/* ---------------------Logout---------------------- */
+
+#logout{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - var(--headerHeight) - var(--headerHeight));
+}
+
+#logout .buttonContainer{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  padding: 1rem;
+}
+
+/* ---------------------Menu---------------------- */
+
+#menu{
+  background-color: var(--green900);
+  display: flex;
+  justify-content: center;
+}
+#menu .container{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: var(--maxContainerWidth);
+  justify-content: space-between;
+  width: 100%;
+  margin: 1rem;
+}
+.cards_container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  gap: 1rem;
+  padding: 1rem 0;
+}
+.dishCard{
+  display: flex;
+  flex-direction: column;
+  max-width: 18rem;
+  overflow: hidden;
+  height: fit-content;
+  min-height: 23rem;
+  background-color: var(--white900_50);
+  border-radius: .5rem;
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.486);
+}
+.dishCard img {
+  width: 18rem;
+  height: 10rem;
+  object-fit: cover;
+  box-shadow: 0px 0px 20px black;
+}
+.dishCard_datos{
+  display: flex;
+  flex-direction: column;
+  height: 12.6rem;
+  justify-content: space-between;
+  align-content: space-between;
+  padding: 1rem;
+  gap: .5rem;
+}
+.dishCard p {
+  overflow: hidden;
+  display: -webkit-box;
+   -webkit-line-clamp: 6;
+           line-clamp: 6; 
+   -webkit-box-orient: vertical;
+}
+.dishCard h3{
+  text-shadow: 0px 5px 15px black;
+}
+/* ------------------Order online------------------- */
+
+#order{
+  min-height: calc(100vh - var(--headerHeight));
+}
+
+/* ---------------------Footer---------------------- */
+
+footer{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--beige500);
+  box-shadow: 0px 0px 20px rgb(51, 51, 51);
+  padding: 2rem 1rem;
+  bottom: 0px;
+}
+footer .container{
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  max-width: var(--maxContainerWidth);
+  text-align: center;
+}
+.footer_socialsLinks{
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+
+@media screen and (max-width: 576px) {
+  .footer_socialsLinks{
+    flex-direction: column;
+  }
+}
+
