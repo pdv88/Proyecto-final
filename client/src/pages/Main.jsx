@@ -48,7 +48,7 @@ function Main() {
                 our Chicago style feta cheese, garnished with crunchy garlic and
                 rosemary croutons.
               </p>
-              <button>Order a delivery</button>
+              <button className="addToCart">Order a delivery</button>
               </div>
             </div>
             <div className="card">
@@ -65,7 +65,7 @@ function Main() {
               <p>
                 Our Bruschetta is made from grilled bread that has been smeared with garlic and seasoned with salt and olive oil.
               </p>
-              <button>Order a delivery</button>
+              <button className="addToCart">Order a delivery</button>
               </div>
             </div>
             <div className="card">
@@ -82,7 +82,7 @@ function Main() {
               <p>
                 This comes straight from grandma's recipe book, every last ingredient has been sourced and is as authentic as can be imagined.
               </p>
-              <button>Order a delivery</button>
+              <button className="addToCart">Order a delivery</button>
               </div>
             </div>
           </div>

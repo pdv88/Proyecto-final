@@ -4,22 +4,37 @@ function Menu() {
   document.title = "Menu | Little Lemon";
 
   function menuMaker(dishes){
-        return dishes.map((dish, index) => {
+        return dishes.map((dish) => {
             return (
-              <div className="dishCard" key={index}>
+              <div className="dishCard" key={dish.id}>
                 <img src={dish.src} alt={dish.dish} />
                 <div className="dishCard_datos">
                   <h3>{dish.dish}</h3>
                   <p>{dish.description}</p>
                   <h3 className="price">${dish.price.toFixed(2)}</h3>
+                  <button className="addToCart" onClick={()=>addToCart(dish)}>Add to cart</button>
                 </div>
               </div>
             );
           })
   }
 
+  function addToCart(product) {
+    let cart = localStorage.getItem("cart");
+    if(!cart) {
+        let emptyArray = [];
+        emptyArray.push(product);
+        localStorage.setItem("cart",JSON.stringify(emptyArray));
+    } else {
+        let cartArray = JSON.parse(cart || "[]");
+        cartArray.push(product);
+        localStorage.setItem("cart",JSON.stringify(cartArray));
+    }
+}
+
   const breakfast = [
     {
+      id:'b01',
       src: "/breakfasts/bread_butter_jam.jpg",
       dish: "Pane Burro e Marmellata",
       description:
@@ -27,6 +42,7 @@ function Menu() {
       price: 2.3,
     },
     {
+      id:'b02',
       src: "/breakfasts/cornetto_and_milk.jpg",
       dish: "Cornetto",
       description:
@@ -34,6 +50,7 @@ function Menu() {
       price: 2.0,
     },
     {
+      id:'b03',
       src: "/breakfasts/fette_biscottate.jpg",
       dish: "Fette Biscottate",
       description:
@@ -41,6 +58,7 @@ function Menu() {
       price: 2.0,
     },
     {
+      id:'b04',
       src: "/breakfasts/italian_biscotti.jpg",
       dish: "Biscotti",
       description:
@@ -48,6 +66,7 @@ function Menu() {
       price: 3.5,
     },
     {
+      id:'b05',
       src: "/breakfasts/nutella.jpg",
       dish: "Pane e Nutella",
       description:
@@ -55,6 +74,7 @@ function Menu() {
       price: 4.3,
     },
     {
+      id:'b06',
       src: "/breakfasts/cereals_milk.jpg",
       dish: "Cereali",
       description:
@@ -62,6 +82,7 @@ function Menu() {
       price: 1.8,
     },
     {
+      id:'b07',
       src: "/breakfasts/saccottino.jpg",
       dish: "Saccottino",
       description:
@@ -69,6 +90,7 @@ function Menu() {
       price: 3.8,
     },
     {
+      id:'b08',
       src: "/breakfasts/cannoli.jpg",
       dish: "Cannoli",
       description:
@@ -76,6 +98,7 @@ function Menu() {
       price: 5.6,
     },
     {
+      id:'b09',
       src: "/breakfasts/maritozzi.jpg",
       dish: "Maritozzi",
       description:
@@ -83,16 +106,18 @@ function Menu() {
       price: 4.6,
     },
     {
+      id:'b10',
       src: "/breakfasts/cantuccini.jpg",
       dish: "Cantucci",
       description:
         "Crunchy almond cookies, cantucci are typically served with sweet dessert wine. Though traditionally enjoyed as a dessert, these delectable cookies can also appear during breakfast, providing a tasty, nutty treat to pair with coffee or tea.",
       price: 3.5,
-    },
+    }
   ];
 
   const meal = [
     {
+      id:'m01',
       src: "/meals/lasagne.jpg",
       dish: "Lasagne alla Bolognese",
       description:
@@ -100,6 +125,7 @@ function Menu() {
       price: 6.50,
     },
     {
+      id:'m02',
       src: "/meals/fettuccine.jpg",
       dish: "Fettuccine al Pomodoro",
       description:
@@ -107,6 +133,7 @@ function Menu() {
       price: 5.30,
     },
     {
+      id:'m03',
       src: "/meals/gnocchi.jpg",
       dish: "Gnocchi di Patate",
       description:
@@ -114,6 +141,7 @@ function Menu() {
       price: 4.80,
     },
     {
+      id:'m04',
       src: "/meals/melanzane.jpg",
       dish: "Melanzane alla Parmigiana",
       description:
@@ -121,6 +149,7 @@ function Menu() {
       price: 7.20,
     },
     {
+      id:'m05',
       src: "/meals/pizza-margherita.jpg",
       dish: "Pizza Margherita",
       description:
@@ -128,6 +157,7 @@ function Menu() {
       price: 7.80,
     },
     {
+      id:'m06',
       src: "/meals/vitello-tonnato.jpg",
       dish: "Vitello Tonnato",
       description:
@@ -135,6 +165,7 @@ function Menu() {
       price: 9.50,
     },
     {
+      id:'m07',
       src: "/meals/tortellini.jpg",
       dish: "Tortellini",
       description:
@@ -142,6 +173,7 @@ function Menu() {
       price: 4.8,
     },
     {
+      id:'m08',
       src: "/meals/meatballs.jpeg",
       dish: "Meatballs in sauce",
       description:
@@ -149,6 +181,7 @@ function Menu() {
       price: 9.50,
     },
     {
+      id:'m09',
       src: "/meals/risotto.jpg",
       dish: "Risotto",
       description:
@@ -156,12 +189,13 @@ function Menu() {
       price: 6.20,
     },
     {
+      id:'m10',
       src: "/meals/amatriciana.jpg",
       dish: "Amatriciana",
       description:
         "Amatriciana pasta, derived from the city of Amatrice, is a pride of Roman gastronomy and Lazio in general. Unfortunately, it suffers many bad imitations, but tradition would require the use of jowl, pecorino cheese and tomato. The most suitable pasta format? The bucatini!",
       price: 8.50,
-    },
+    }
   ];
 
   const dinner = [
