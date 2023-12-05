@@ -5,11 +5,10 @@
   "type": "module",
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "netlify deploy --prod",
   "dev": "node server-dev.js",
   "build:client": "vite build --outDir dist/client",
   "build:server": "vite build --ssr src/entry-server.jsx --outDir dist/server",
-  "build": "npm run build:client && npm run build:server",
+  "build": "npm run build:client && npm start:server",
   "serve": "node server-prod.js"
 },
   "dependencies": {
