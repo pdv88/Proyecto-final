@@ -2,18 +2,20 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 function Nav() {
-  const [cart, setCart] = useState(JSON.parse(localStorage.getItem("cart")))
+  // const [cart, setCart] = useState(JSON.parse(localStorage.getItem("cart")))
 
   
-  const [cartCounter, setCartCounter] = useState(cart.length)
+  // const [cartCounter, setCartCounter] = useState(cart.length)
 
-  useEffect(() => {
+  // useEffect(() => {
 
-  }, [cart])
+  // }, [cart])
 
-  useEffect(() => {
-    setCartCounter(cart.length)
-  },[cartCounter])
+  // useEffect(() => {
+  //   setCartCounter(cart.length)
+  // },[cartCounter])
+
+  // codigo que va en link de cart {cartCounter == 0 ? '' : cartCounter}
 
   return (
     <>
@@ -22,7 +24,7 @@ function Nav() {
           <li><Link to={'/about'}>About</Link></li>
           <li><Link to={'/menu'}>Menu</Link></li>
           <li><Link to={'/reservations'}>Reservations</Link></li>
-          <li><Link to={'/cart'}>Cart {cartCounter == 0 ? '' : cartCounter}</Link></li>
+          <li><Link to={'/cart'}>Cart </Link></li>
           <li>{localStorage.getItem('user')=== null ? (
             <Link to={'/login'}>Login</Link>
           ):(
