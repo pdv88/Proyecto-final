@@ -4,7 +4,6 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "predeploy": "npm run build",
   "dev": "node server-dev.js",
   "build": "npm run build",
   "serve": "node server-prod.js"
