@@ -6,7 +6,6 @@
   "scripts": {
     "predeploy": "npm run build",
   "dev": "node server-dev.js",
-  "build:client": "vite build --outDir dist/client",
   "build": "npm run build:client",
   "serve": "node server-prod.js"
 },
