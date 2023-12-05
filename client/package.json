@@ -7,7 +7,6 @@
     "predeploy": "npm run build",
   "dev": "node server-dev.js",
   "build:client": "vite build --outDir dist/client",
-  // "build:server": "vite build --ssr src/entry-server.jsx --outDir dist/server",
   "build": "npm run build:client",
   "serve": "node server-prod.js"
 },
