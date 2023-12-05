@@ -6,7 +6,7 @@
   "scripts": {
     "predeploy": "npm run build",
   "dev": "node server-dev.js",
-  "build": "npm run build:client",
+  "build": "npm run build",
   "serve": "node server-prod.js"
 },
   "dependencies": {
