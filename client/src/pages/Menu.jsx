@@ -115,7 +115,7 @@ function Menu() {
     }
   ];
 
-  const meal = [
+  const lunch = [
     {
       id:'m01',
       src: "/meals/lasagne.jpg",
@@ -276,15 +276,15 @@ function Menu() {
       <section id="menu">
         <div className="container">
           <h1>Menu</h1>
-          <h2>Breakfasts</h2>
+          <h2>Breakfast</h2>
           <div className="cards_container">
             {menuMaker(breakfast)}
           </div>
-          <h2>Meals</h2>
+          <h2>Lunch</h2>
           <div className="cards_container">
-            {menuMaker(meal)}
+            {menuMaker(lunch)}
           </div>
-          <h2>Dinners</h2>
+          <h2>Dinner</h2>
           <div className="cards_container">
             {menuMaker(dinner)}
           </div>
