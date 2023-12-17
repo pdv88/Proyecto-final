@@ -9,13 +9,13 @@ function Menu() {
   const [dinner, setDinner] = useState([]);
 
   useEffect(() => {
-    axios.post("http://localhost:3000/menu/breakfast").then((response) => {
+    axios.post("http://localhost:3306/menu/breakfast").then((response) => {
       setBreakfast(response.data);
     });
-    axios.post("http://localhost:3000/menu/lunch").then((response) => {
+    axios.post("http://localhost:3306/menu/lunch").then((response) => {
       setLunch(response.data);
     });
-    axios.post("http://localhost:3000/menu/dinner").then((response) => {
+    axios.post("http://localhost:3306/menu/dinner").then((response) => {
       setDinner(response.data);
     });
   }, []);

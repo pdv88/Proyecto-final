@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { json } from "react-router-dom";
 
 function Cart() {
     document.title = 'Cart | Little Lemon'
