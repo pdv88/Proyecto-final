@@ -5,6 +5,7 @@ function Cart() {
     document.title = 'Cart | Little Lemon'
 
     const [cart,setCart] = useState([]);
+    let totalCart = 0
 
     useEffect(() => {
         let cart = localStorage.getItem("cart");
@@ -39,19 +40,27 @@ function Cart() {
                 <h1>Cart</h1>
                 <div className="cartCardContainer">
                 {cart.map((product, index) => {
+                    totalCart += product.price
                     return (
                     <li className="cartItemCard" key={index}>
                         <img src={product.src} alt="product"/>
                         <div className="cartItemCard_data">
                         <p>{product.dish}</p>
-                        <span>€{product.price}</span>
-                        <button type="button" className="secondaryButton" onClick={() => deleteProduct(index)}>Remove</button>
+                        <span>€{product.price.toFixed(2)}</span>
                         </div>
+                        <button type="button" className="secondaryButton removeItemCart" onClick={() => deleteProduct(index)}>X</button>
                     </li>
                 )
                 })}
                 </div>
-                {cart.length !== 0 ? (<button onClick={buyCart}>Buy now</button>) : (<p>Your cart is empty</p>)}
+                {cart.length !== 0 ? (
+                <div className="cartTotal">
+                    <h2>Your total is €{totalCart.toFixed(2)}</h2>
+                    <button onClick={buyCart}>Checkout</button>
+                </div>
+                ) : (
+                <p>Your cart is empty</p>
+                )}
             </div>
         </section>
         </>

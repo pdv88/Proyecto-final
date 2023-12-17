@@ -29,6 +29,9 @@
   margin: 0;
   padding: 0;
 }
+body{
+  height: 100svh;
+}
 
 ::-webkit-scrollbar{
   width: .7rem;
@@ -63,8 +66,12 @@ button{
 button:hover{
   background-color: var(--yellow700);
   cursor: pointer;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.199);
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.199);
   transition: all 300ms;
+}
+button:active{
+  transform: scale(.9);
+
 }
 .secondaryButton{
   background-color: transparent;
@@ -373,7 +380,7 @@ nav a{
 
 #reservations{
   display: flex;
-  background: no-repeat url(./assets/icons_assets/restaurant2.jpg) ;
+  background-color: var(--green900);
   background-size: cover;
   min-height: calc(100vh - var(--headerHeight));
   width: 100%;
@@ -385,11 +392,14 @@ nav a{
   flex-direction: column;
   max-width: 40rem;
   justify-content: center;
+  align-items: center;
   padding: 1rem;
+  gap: 1rem;
   backdrop-filter: blur(5px);
   border-radius: 1rem;
-  background-color: var(--green900_50);
+  background:linear-gradient(145deg, #42554e, #4e655d);
   margin: 1rem;
+  box-shadow: var(--greenCardShadow);
 }
 #reservations h1{
   padding-bottom: 1rem;
@@ -481,6 +491,32 @@ p.formError {
   padding: 1rem;
 }
 
+/* -------------------Register-------------------- */
+
+#register{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - var(--headerHeight));
+  background-color: var(--green900);
+}
+
+#register .container{
+  background:linear-gradient(145deg, #42554e, #4e655d);
+  padding: 3rem;
+  box-shadow: var(--greenCardShadow);
+  border-radius: 3rem;
+  margin: 1rem;
+  max-width: var(--maxContainerWidth);
+  justify-self: center;
+}
+
+#register form{
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
 /* ---------------------Menu---------------------- */
 
 #menu{
@@ -570,6 +606,7 @@ p.formError {
   flex-direction: column;
   padding: 1rem 0;
   gap: 1rem;
+  transition: all 1000ms;
 }
 .cartItemCard{
   display: flex;
@@ -592,7 +629,21 @@ p.formError {
   height: auto;
   object-fit: cover;
 }
-
+.removeItemCart{
+  position: relative;
+  height: auto;
+  padding: .5rem;
+}
+.cartTotal{
+  display: flex;
+  flex-direction: column;
+  padding: 1rem .5rem;
+  align-items: end;
+  gap: 1rem;
+  background-color: var(--white900_50);
+  border-radius: 1rem;
+  box-shadow: var(--greenCardShadow);
+}
 
 /* ---------------------Footer---------------------- */
 

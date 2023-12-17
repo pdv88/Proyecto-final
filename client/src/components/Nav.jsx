@@ -2,6 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 function Nav() {
+
+  useEffect(()=>{
+
+  })
+
   // const [cart, setCart] = useState(JSON.parse(localStorage.getItem("cart")))
 
   
@@ -28,7 +33,7 @@ function Nav() {
           <li>{localStorage.getItem('user')=== null ? (
             <Link to={'/login'}>Login</Link>
           ):(
-            <Link to={'/logout'}>Hi {JSON.parse(localStorage.getItem('user')).nombre}</Link>)}
+            <Link to={'/logout'}>Logout</Link>)}
             </li>
         </ul>
       </nav>

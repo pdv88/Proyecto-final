@@ -7,6 +7,7 @@ import Menu from './pages/Menu';
 import Cart from './pages/Cart';
 import Login from './pages/Login';
 import Logout from './pages/Logout'
+import Register from './pages/Register';
 
 
 import React from 'react';
@@ -25,6 +26,7 @@ function Rutas(){
                     <Route path='/cart' element={<Cart/>}/>
                     <Route path='/login' element={<Login/>}/>
                     <Route path='/logout' element={<Logout/>}/>
+                    <Route path='/register' element={<Register/>}/>
                 </Routes>
             <Footer/>
         </Router>

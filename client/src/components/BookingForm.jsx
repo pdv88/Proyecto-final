@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 function BookingForm() {
   
@@ -62,17 +63,24 @@ function BookingForm() {
     if (Object.keys(errorsTemp).length > 0) {
       setErrors(errorsTemp);
     } else {
-      setErrors({});
-      setForm({
-        name: "",
-        email: "",
-        date: "",
-        hour: "",
-        guests: "",
-        occasion: "",
-      });
-      setReservations((prevReservations) => [...prevReservations, form]);
-      localStorage.setItem('reservations', JSON.stringify(reservations))
+      axios.post('http://localhost:3000/reservations', form).then(response => {
+        if (response.data.status === 'success') {
+          alert('Reservation Created succesfully')
+          setReservations((prevReservations) => [...prevReservations, form]);
+          localStorage.setItem('reservations', JSON.stringify(reservations))
+          setErrors({});
+          setForm({
+            name: "",
+            email: "",
+            date: "",
+            hour: "",
+            guests: "",
+            occasion: "",
+          });
+        } else {
+          alert('Reservation failed, try again')
+        }
+      })
     }
   }
 

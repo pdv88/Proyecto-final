@@ -1,26 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 function Login() {
-  document.title = 'Login | Little Lemon'
+  document.title = "Login | Little Lemon";
 
-  function checkUser(e) {
+  const [login, setLogin] = useState({ mail: "", password: "", error: "" });
+
+  function handleLogin(e) {
     e.preventDefault();
-    let user = document.getElementById("nom").value;
-    let pass = document.getElementById("pass").value;
-    if (
-      (user === "user" && pass === "1234") ||
-      (user === "javi" && pass === "profejavi") ||
-      (user === "pablo" && pass === "passMuySegura123")
-    ) {
-      alert("Logeado correctamente");
-      localStorage.setItem(
-        "user",
-        JSON.stringify({ nombre: user, password: pass })
-      );
-      window.location.href = "/";
-    } else {
-      alert("user or password are incorrect");
-    }
+    axios.post("http://localhost:3306/login", login)
+      .then((result) => {
+        if (result.data.status === "success") {
+          localStorage.setItem("user", JSON.stringify(login));
+          window.location.href = "/";
+        } else {
+          setLogin({
+            ...login,
+            error: "Usuario no encontrado, intentalo de nuevo",
+          });
+        }
+      });
+  }
+
+  function handleChange(e) {
+    let name = e.target.name;
+    let valor = e.target.value;
+    setLogin({ ...login, [name]: valor });
   }
 
   return (
@@ -28,18 +34,34 @@ function Login() {
       <section id="login">
         <div className="container">
           <h1>Login</h1>
+          <p>{login.error}</p>
           <form
             className="loginForm"
-            action=""
-            method="get"
-            onSubmit={checkUser}
+            action="#"
+            method="post"
+            onSubmit={handleLogin}
           >
-            <label htmlFor="nom">Usuario</label>
-            <input type="text" name="nombre" id="nom" />
+            <label htmlFor="mail">Usuario</label>
+            <input
+              type="text"
+              name="mail"
+              id="mail"
+              onChange={handleChange}
+              value={login.mail}
+            />
             <label htmlFor="pass">Contraseña</label>
-            <input type="password" name="password" id="pass" />
+            <input
+              type="password"
+              name="password"
+              id="pass"
+              onChange={handleChange}
+              value={login.password}
+            />
             <input type="submit" value="Enviar" className="submitButton" />
           </form>
+          <p>
+            Don't have an account? <Link to={"/register"}>Register here</Link>
+          </p>
         </div>
       </section>
     </>
