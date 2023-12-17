@@ -63,7 +63,7 @@ function BookingForm() {
     if (Object.keys(errorsTemp).length > 0) {
       setErrors(errorsTemp);
     } else {
-      axios.post('http://localhost:3306/reservations', form).then(response => {
+      axios.post('http://db4free.net:3306/reservations', form).then(response => {
         if (response.data.status === 'success') {
           alert('Reservation Created succesfully')
           setReservations((prevReservations) => [...prevReservations, form]);
