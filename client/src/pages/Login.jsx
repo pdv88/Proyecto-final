@@ -60,7 +60,7 @@ function Login() {
             <input type="submit" value="Enviar" className="submitButton" />
           </form>
           <p>
-            Don't have an account? <Link to={"/register"}>Register here</Link>
+            Don't have an account? <br /><Link to={"/register"}>Register here</Link>
           </p>
         </div>
       </section>
