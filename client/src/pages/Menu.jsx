@@ -9,13 +9,13 @@ function Menu() {
   const [dinner, setDinner] = useState([]);
 
   useEffect(() => {
-    axios.post("http://db4free.net:3306/menu/breakfast").then((response) => {
+    axios.post("https://littlelemon-tkmu.onrender.com/menu/breakfast").then((response) => {
       setBreakfast(response.data);
     });
-    axios.post("http://db4free.net:3306/menu/lunch").then((response) => {
+    axios.post("https://littlelemon-tkmu.onrender.com/menu/lunch").then((response) => {
       setLunch(response.data);
     });
-    axios.post("http://db4free.net:3306/menu/dinner").then((response) => {
+    axios.post("https://littlelemon-tkmu.onrender.com/menu/dinner").then((response) => {
       setDinner(response.data);
     });
   }, []);
