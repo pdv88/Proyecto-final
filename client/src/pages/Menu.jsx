@@ -25,6 +25,9 @@ function Menu() {
 
 
   function menuMaker(dishes) {
+    if (!dishes) {
+      return null
+    }
     return dishes.map((dish) => {
       return (
         <div className="dishCard" key={dish.id_dish}>
