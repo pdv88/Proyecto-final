@@ -12,7 +12,7 @@
   --white900: #EDEFEE;
   --white900_50: #edefee7e;
   --black900: #333333;
-  --error:rgb(220, 56, 56);
+  --error:rgb(255, 99, 99);
   /* widths & heights */
   --maxContainerWidth:900px;
   --headerHeight: 4.5rem;
@@ -123,6 +123,9 @@ input:focus, .bookingForm select:focus{
   width: 2.5rem;
   height: 2.5rem;
   padding: .5rem;
+}
+.error{
+  color: var(--error);
 }
 
 
@@ -418,9 +421,6 @@ input.submitButton{
 input.submitButton:hover{
   background-color: var(--yellow700);
 }
-p.formError {
-  color: var(--error);
-}
 .reservation-card{
   display: flex;
   flex-direction: column;
@@ -452,7 +452,7 @@ p.formError {
   display: flex;
   justify-content: center;
   align-items: center;
-  background:var(--green900);
+  background: linear-gradient(145deg, #42554e, #4e655d);
   min-height: calc(100svh - var(--headerHeight));
 }
 #login h1{
@@ -675,7 +675,8 @@ footer .container{
   text-align: center;
 }
 .footer_socialsLinks{
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   justify-content: space-between;
   gap: 1rem;
 }
@@ -683,7 +684,7 @@ footer .container{
 
 @media screen and (max-width: 576px) {
   .footer_socialsLinks{
-    flex-direction: column;
+    grid-template-columns: 1fr;
   }
 }
 

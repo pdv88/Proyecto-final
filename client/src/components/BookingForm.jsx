@@ -103,7 +103,7 @@ function BookingForm() {
             value={form.name}
             onChange={handleChange}
           />
-          {errors.name && <p className="formError">{errors.name}</p>}
+          {errors.name && <p className="error">{errors.name}</p>}
           <label htmlFor="em">Email</label>
           <input
             type="email"
@@ -112,7 +112,7 @@ function BookingForm() {
             value={form.email}
             onChange={handleChange}
           />
-          {errors.email && <p className="formError">{errors.email}</p>}
+          {errors.email && <p className="error">{errors.email}</p>}
           <label htmlFor="res-date">Choose date</label>
           <input
             type="date"
@@ -121,7 +121,7 @@ function BookingForm() {
             value={form.date}
             onChange={handleChange}
           />
-          {errors.date && <p className="formError">{errors.date}</p>}
+          {errors.date && <p className="error">{errors.date}</p>}
           <label htmlFor="hour">Choose time</label>
           <select
             id="hour"
@@ -139,7 +139,7 @@ function BookingForm() {
             <option>21:00</option>
             <option>22:00</option>
           </select>
-          {errors.hour && <p className="formError">{errors.hour}</p>}
+          {errors.hour && <p className="error">{errors.hour}</p>}
           <label htmlFor="guests">Number of guests</label>
           <input
             type="number"
@@ -151,7 +151,7 @@ function BookingForm() {
             value={form.guests}
             onChange={handleChange}
           />
-          {errors.guests && <p className="formError">{errors.guests}</p>}
+          {errors.guests && <p className="error">{errors.guests}</p>}
           <label htmlFor="occasion">Occasion</label>
           <select
             id="occasion"
@@ -165,7 +165,7 @@ function BookingForm() {
             <option>Birthday</option>
             <option>Anniversary</option>
           </select>
-          {errors.occasion && <p className="formError">{errors.occasion}</p>}
+          {errors.occasion && <p className="error">{errors.occasion}</p>}
           <input
             className="submitButton"
             type="submit"

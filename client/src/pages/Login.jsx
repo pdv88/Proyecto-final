@@ -6,21 +6,33 @@ function Login() {
   document.title = "Login | Little Lemon";
 
   const [login, setLogin] = useState({ mail: "", password: "", error: "" });
+  const [errors, setErrors] = useState({mail:'', password:''})
 
   function handleLogin(e) {
     e.preventDefault();
-    axios.post("https://littlelemon-tkmu.onrender.com/login", login)
-      .then((result) => {
-        if (result.data.status === "success") {
-          localStorage.setItem("user", JSON.stringify(login));
-          window.location.href = "/";
-        } else {
-          setLogin({
-            ...login,
-            error: "Usuario no encontrado, intentalo de nuevo",
-          });
-        }
-      });
+    let errorsTemp = {}
+    if(login.mail === ''){
+      errorsTemp.mail = 'Please input your mail'
+    }
+    if (login.password === '') {
+      errorsTemp.password = 'Please input your password'
+    }
+    if (Object.keys(errorsTemp).length > 0) {
+      setErrors(errorsTemp)
+    } else {
+      axios.post("https://littlelemon-tkmu.onrender.com:3306/login", login)
+        .then((result) => {
+          if (result.data.status === "success") {
+            localStorage.setItem("user", JSON.stringify(login));
+            window.location.href = "/";
+          } else {
+            setLogin({
+              ...login,
+              error: "Usuario no encontrado, intentalo de nuevo",
+            });
+          }
+        });
+    }
   }
 
   function handleChange(e) {
@@ -41,7 +53,7 @@ function Login() {
             method="post"
             onSubmit={handleLogin}
           >
-            <label htmlFor="mail">Usuario</label>
+            <label htmlFor="mail">Email</label>
             <input
               type="text"
               name="mail"
@@ -49,7 +61,8 @@ function Login() {
               onChange={handleChange}
               value={login.mail}
             />
-            <label htmlFor="pass">Contraseña</label>
+            {errors.mail && <p className="error">{errors.mail}</p>}
+            <label htmlFor="pass">Password</label>
             <input
               type="password"
               name="password"
@@ -57,6 +70,7 @@ function Login() {
               onChange={handleChange}
               value={login.password}
             />
+            {errors.mail && <p className="error">{errors.password}</p>}
             <input type="submit" value="Enviar" className="submitButton" />
           </form>
           <p>
