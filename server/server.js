@@ -113,6 +113,6 @@ try{
     console.error('Error al conectar a base de datos: '+error)
 }
 
-app.listen(process.env.PORT,() => {
+app.listen(process.env.PORT,'0.0.0.0', () => {
     console.log('Servidor levantado')
 })
