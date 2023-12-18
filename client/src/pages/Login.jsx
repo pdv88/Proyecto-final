@@ -20,7 +20,7 @@ function Login() {
     if (Object.keys(errorsTemp).length > 0) {
       setErrors(errorsTemp)
     } else {
-      axios.post("http://localhost:3306/login", login)
+      axios.post("https://little-lemon-server.onrender.com/login", login)
         .then((result) => {
           if (result.data.status === "success") {
             localStorage.setItem("user", JSON.stringify(login));
