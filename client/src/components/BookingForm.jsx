@@ -4,6 +4,9 @@ import axios from "axios";
 function BookingForm() {
   
     const [reservations, setReservations] = useState([]);
+
+    const url = "https://little-lemon-server.onrender.com"
+    // const url = 'localhost:3000'
     
     useEffect(() => {
       const savedReservations = JSON.parse(localStorage.getItem('reservations'))
@@ -63,7 +66,7 @@ function BookingForm() {
     if (Object.keys(errorsTemp).length > 0) {
       setErrors(errorsTemp);
     } else {
-      axios.post('https://littlelemon-tkmu.onrender.com/reservations', form).then(response => {
+      axios.post(url+'/reservations', form).then(response => {
         if (response.data.status === 'success') {
           alert('Reservation Created succesfully')
           setReservations((prevReservations) => [...prevReservations, form]);

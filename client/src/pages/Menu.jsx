@@ -8,14 +8,17 @@ function Menu() {
   const [lunch, setLunch] = useState([]);
   const [dinner, setDinner] = useState([]);
 
+  const url = "https://little-lemon-server.onrender.com"
+  // const url = 'localhost:3000'
+
   useEffect(() => {
-    axios.post("https://littlelemon-tkmu.onrender.com/menu/breakfast").then((response) => {
+    axios.post(url+"/menu/breakfast").then((response) => {
       setBreakfast(response.data);
     });
-    axios.post("https://littlelemon-tkmu.onrender.com/menu/lunch").then((response) => {
+    axios.post(url+"/menu/lunch").then((response) => {
       setLunch(response.data);
     });
-    axios.post("https://littlelemon-tkmu.onrender.com/menu/dinner").then((response) => {
+    axios.post(url+"/menu/dinner").then((response) => {
       setDinner(response.data);
     });
   }, []);

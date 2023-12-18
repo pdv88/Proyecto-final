@@ -10,6 +10,9 @@ function Register() {
   const queryParams = new URLSearchParams(location.search)
   const status = queryParams.get("status");
 
+  const url = "https://little-lemon-server.onrender.com"
+  // const url = 'localhost:3000'
+
   const [register, setRegister] = useState({
     name: "",
     lastname: "",
@@ -64,7 +67,7 @@ function Register() {
     const errors = validate(register)
     setErrors(errors)
     if (Object.keys(errors).length === 0) {
-      axios.post('http://localhost:3000/register', register).then(result => {
+      axios.post(url+'/register', register).then(result => {
         if (result.data.status === 'success') {
           alert("Account register successful")
           window.location.href = '/'

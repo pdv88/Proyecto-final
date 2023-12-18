@@ -7,6 +7,9 @@ function Login() {
 
   const [login, setLogin] = useState({ mail: "", password: "", error: "" });
   const [errors, setErrors] = useState({mail:'', password:''})
+  
+  const url = "https://little-lemon-server.onrender.com"
+  // const url = 'localhost:3000' 
 
   function handleLogin(e) {
     e.preventDefault();
@@ -20,7 +23,7 @@ function Login() {
     if (Object.keys(errorsTemp).length > 0) {
       setErrors(errorsTemp)
     } else {
-      axios.post("https://little-lemon-server.onrender.com/login", login)
+      axios.post(url+"/login", login)
         .then((result) => {
           if (result.data.status === "success") {
             localStorage.setItem("user", JSON.stringify(login));
