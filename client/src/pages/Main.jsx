@@ -1,7 +1,7 @@
 import React from "react";
 import restauranfood from "../assets/icons_assets/restauranfood.jpg";
 import greekSalad from "../assets/icons_assets/greek-salad.jpg";
-import bruchetta from "../assets/icons_assets/bruchetta.svg";
+import bruchetta from "../assets/icons_assets/bruchetta.jpg";
 import lemonDessert from "../assets/icons_assets/lemon-dessert.jpg";
 import { useNavigate } from "react-router-dom";
 
