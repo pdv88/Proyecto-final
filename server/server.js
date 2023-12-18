@@ -3,8 +3,6 @@
 const express = require('express')
 const cors = require('cors')
 const mysql = require('mysql')
-const bcrypt = require('bcrypt')
-const session = require('express-session')
 const bodyParser = require('body-parser')
 
 const app = express()
