@@ -2,12 +2,31 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 function BookingForm() {
-  
-    const [reservations, setReservations] = useState([]);
 
     const url = "https://little-lemon-server.onrender.com"
     // const url = 'localhost:3000'
+  
+    const [reservations, setReservations] = useState([]);
+
     
+    const [form, setForm] = useState({
+      id_user: JSON.parse(localStorage.getItem('userInfo')).id_user,
+      name: "",
+      email: "",
+      date: "",
+      hour: "",
+      guests: "",
+      occasion: "",
+    });
+  
+    const [errors, setErrors] = useState({
+      name: "",
+      email: "",
+      date: "",
+      hour: "",
+      guests: "",
+      occasion: "",
+    });
     useEffect(() => {
       const savedReservations = JSON.parse(localStorage.getItem('reservations'))
       if (savedReservations) {
@@ -19,23 +38,6 @@ function BookingForm() {
       localStorage.setItem('reservations', JSON.stringify(reservations))
     }, [reservations]);
 
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    date: "",
-    hour: "",
-    guests: "",
-    occasion: "",
-  });
-
-  const [errors, setErrors] = useState({
-    name: "",
-    email: "",
-    date: "",
-    hour: "",
-    guests: "",
-    occasion: "",
-  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -72,7 +74,7 @@ function BookingForm() {
           setReservations((prevReservations) => [...prevReservations, form]);
           localStorage.setItem('reservations', JSON.stringify(reservations))
           setErrors({});
-          setForm({
+          setForm({...form,
             name: "",
             email: "",
             date: "",
@@ -181,6 +183,7 @@ function BookingForm() {
                 <>
                   <div key={index} className="reservation-card">
                     <h2>Reservation {parseInt(index) + 1}</h2>
+                    <h3>{reservation.id_user}</h3>
                     <h3>{reservation.date}</h3>
                     <h3>{reservation.hour}</h3>
                     <p>

@@ -9,7 +9,7 @@ function Login() {
   const [errors, setErrors] = useState({mail:'', password:''})
   
   const url = "https://little-lemon-server.onrender.com"
-  // const url = 'localhost:3000' 
+  // const url = 'http://localhost:3306' 
 
   function handleLogin(e) {
     e.preventDefault();
@@ -49,7 +49,7 @@ function Login() {
       <section id="login">
         <div className="container">
           <h1>Login</h1>
-          <p>{login.error}</p>
+          <p className="error">{login.error}</p>
           <form
             className="loginForm"
             action="#"

@@ -9,7 +9,7 @@ function Menu() {
   const [dinner, setDinner] = useState([]);
 
   const url = "https://little-lemon-server.onrender.com"
-  // const url = 'localhost:3000'
+  // const url = 'http://localhost:3306'
 
   useEffect(() => {
     axios.post(url+"/menu/breakfast").then((response) => {

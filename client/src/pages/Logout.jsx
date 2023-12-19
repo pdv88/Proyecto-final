@@ -6,6 +6,7 @@ function Logout() {
   const navigate = useNavigate();
   function closeSesion() {
     localStorage.removeItem("user");
+    localStorage.removeItem("userInfo");
     window.location.href = "/";
   }
   return (

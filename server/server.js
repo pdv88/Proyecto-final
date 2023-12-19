@@ -35,6 +35,19 @@ app.post('/login',(req,res) => {
     })
 })
 
+// ------peticion de informacion de usuario------
+
+app.post('/user', (req,res) => {
+    const userMail = req.body.mail
+    db.query("SELECT id_user,name,lastname,phone FROM users WHERE mail=?",[userMail], (err,result) => {
+        if (err) {
+            console.error('Error fetching user data: '+err)
+        } else{
+            res.json(result)
+        }
+    })
+})
+
 // ------Peticion para registro------
 
 app.post('/register', (req,res) => {
