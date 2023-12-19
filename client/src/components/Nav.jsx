@@ -4,8 +4,8 @@ import axios from "axios";
 
 function Nav() {
 
-  // const url = "https://little-lemon-server.onrender.com"
-  const url = 'http://localhost:3306' 
+  const url = "https://little-lemon-server.onrender.com"
+  // const url = 'http://localhost:3306' 
 
   
   const [userInfo, setUserInfo] = useState({id_user:0,name:'',lastname:'',mail:'',phone:0}) 

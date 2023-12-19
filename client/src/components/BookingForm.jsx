@@ -4,7 +4,7 @@ import axios from "axios";
 function BookingForm() {
 
     const url = "https://little-lemon-server.onrender.com"
-    // const url = 'localhost:3000'
+    // const url = 'localhost:3306'
   
     const [reservations, setReservations] = useState([]);
 
