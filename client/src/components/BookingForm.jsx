@@ -2,42 +2,40 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 function BookingForm() {
+  const url = "https://little-lemon-server.onrender.com"
+  // const url = "http://localhost:3000";
 
-    const url = "https://little-lemon-server.onrender.com"
-    // const url = 'localhost:3306'
-  
-    const [reservations, setReservations] = useState([]);
+  const [reservations, setReservations] = useState([]);
 
-    
-    const [form, setForm] = useState({
-      id_user: JSON.parse(localStorage.getItem('userInfo')).id_user,
-      name: "",
-      email: "",
-      date: "",
-      hour: "",
-      guests: "",
-      occasion: "",
-    });
-  
-    const [errors, setErrors] = useState({
-      name: "",
-      email: "",
-      date: "",
-      hour: "",
-      guests: "",
-      occasion: "",
-    });
-    useEffect(() => {
-      const savedReservations = JSON.parse(localStorage.getItem('reservations'))
-      if (savedReservations) {
-        setReservations(savedReservations)
-      }
-    }, [])
+  useEffect(() => {
+    const idUser = parseInt(JSON.parse(localStorage.getItem("user")).id_user);
+    console.log(idUser);
+    axios
+      .post(url + "/userReservations", { idUser: idUser })
+      .then((response) => {
+        console.log(response.data);
+        setReservations(response.data);
+      });
+  }, []);
 
-    useEffect(() => {
-      localStorage.setItem('reservations', JSON.stringify(reservations))
-    }, [reservations]);
+  const [form, setForm] = useState({
+    userId: parseInt(JSON.parse(localStorage.getItem("user")).id_user),
+    name: "",
+    email: "",
+    date: "",
+    hour: "",
+    guests: "",
+    occasion: "",
+  });
 
+  const [errors, setErrors] = useState({
+    name: "",
+    email: "",
+    date: "",
+    hour: "",
+    guests: "",
+    occasion: "",
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -68,33 +66,84 @@ function BookingForm() {
     if (Object.keys(errorsTemp).length > 0) {
       setErrors(errorsTemp);
     } else {
-      axios.post(url+'/reservations', form).then(response => {
-        if (response.data.status === 'success') {
-          alert('Reservation Created succesfully')
-          setReservations((prevReservations) => [...prevReservations, form]);
-          localStorage.setItem('reservations', JSON.stringify(reservations))
+      axios.post(url + "/reservations", form).then((response) => {
+        if (response.data.status === "success") {
+          alert("Reservation Created succesfully");
+          console.log("reserations made " + reservations);
+          if (reservations.status === "no hay reservaciones") {
+            setReservations(form);
+          } else {
+            setReservations((prevReservations) => [...prevReservations, form]);
+          }
+          localStorage.setItem("reservations", JSON.stringify(reservations));
           setErrors({});
-          setForm({...form,
+          console.log("reservation " + form.userId);
+          setForm({
+            ...form,
             name: "",
             email: "",
             date: "",
             hour: "",
             guests: "",
             occasion: "",
+            id_user: null,
           });
         } else {
-          alert('Reservation failed, try again')
+          alert("Reservation failed, try again");
         }
-      })
+      });
     }
   }
 
-  function deleteReservation(e, index) {
-    const auxReservations = reservations.filter(
-      (reservation, i) => i !== index
-    );
-    setReservations(auxReservations);
+  function deleteReservation(id) {
+    axios
+      .delete(url + "/deleteReservation", { data: { id } })
+      .then((response) => {
+        if (response.data.status === "delete succesful") {
+          const auxReservations = reservations.filter(
+            (reservation) => reservation.id_reservation !== id
+          );
+          setReservations(auxReservations);
+        }
+      });
   }
+
+  function showReservations() {
+    if (reservations.length === undefined) {
+      return 
+    } else {
+      return reservations.map((reservation) => {
+        const date = new Date(reservation.date)
+
+        return (
+          <>
+            <div key={reservation.id_reservation} className="reservation-card">
+              <h2>Reservation {reservation.id_reservation}</h2>
+              <h3>User ID: {reservation.id_user}</h3>
+              <h3>Date: {date.getDate()}-{date.getMonth()+1}-{date.getFullYear()}</h3>
+              <h3>Time: {reservation.time}</h3>
+              <p>
+                Name: <strong>{reservation.name}</strong>
+              </p>
+              <p>
+                Guests: <strong>{reservation.guests}</strong>
+              </p>
+              <p>
+                Occasion: <strong>{reservation.occasion}</strong>
+              </p>
+              <button
+                onClick={() =>
+                  deleteReservation(parseInt(reservation.id_reservation))
+                }
+              >
+                Cancel reservation
+              </button>
+            </div>
+          </>
+        );
+      });
+    }
+  };
 
   return (
     <>
@@ -177,33 +226,7 @@ function BookingForm() {
             value="Make Your reservation"
           />
         </form>
-        <div className="prevReservations">
-          {reservations.map((reservation, index) => {
-              return (
-                <>
-                  <div key={index} className="reservation-card">
-                    <h2>Reservation {parseInt(index) + 1}</h2>
-                    <h3>{reservation.id_user}</h3>
-                    <h3>{reservation.date}</h3>
-                    <h3>{reservation.hour}</h3>
-                    <p>
-                      Name: <strong>{reservation.name}</strong>
-                    </p>
-                    <p>
-                      Guests: <strong>{reservation.guests}</strong>
-                    </p>
-                    <p>
-                      Occasion: <strong>{reservation.occasion}</strong>
-                    </p>
-                    <button onClick={(e) => deleteReservation(e, index)}>
-                      Cancel reservation
-                    </button>
-                  </div>
-                </>
-              );
-            })
-          }
-        </div>
+        <div className="prevReservations">{showReservations()}</div>
       </div>
     </>
   );

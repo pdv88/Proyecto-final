@@ -17,7 +17,7 @@ const db = mysql.createConnection({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
-    database: 'little_lemon_db'
+    database: process.env.DB_DATABASE
 })
 
 // =============================Peticiones==================================
@@ -26,9 +26,10 @@ const db = mysql.createConnection({
 
 app.post('/login',(req,res) => {
     const {mail, password} = req.body
-    db.query('SELECT * FROM users WHERE mail=? AND password=?',[mail,password], (err,result) => {
+    db.query('SELECT id_user,name,lastname,mail,phone FROM users WHERE mail=? AND password=?',[mail,password], (err,result) => {
         if (result.length > 0) {
-            res.json({status:'success'})
+            res.json({...result, status:'success'})
+            console.log(result)
         } else {
             res.json({status:'failed'})
         }
@@ -42,7 +43,7 @@ app.post('/user', (req,res) => {
     db.query("SELECT id_user,name,lastname,phone FROM users WHERE mail=?",[userMail], (err,result) => {
         if (err) {
             console.error('Error fetching user data: '+err)
-        } else{
+        } else {
             res.json(result)
         }
     })
@@ -101,9 +102,9 @@ app.post('/menu/dinner', (req,res) => {
 // ------Peticiones de reservaciones------
 
 app.post('/reservations', (req,res) => {
-    const {name,email,date,hour,guests,occasion} = req.body
-    db.query('INSERT INTO reservations (name,email,date,time,guests,occasion) VALUES(?,?,?,?,?,?)',
-    [name,email,date,hour,guests,occasion], 
+    const {userId,name,email,date,hour,guests,occasion} = req.body
+    db.query('INSERT INTO reservations (id_user,name,email,date,time,guests,occasion) VALUES(?,?,?,?,?,?,?)',
+    [userId,name,email,date,hour,guests,occasion], 
     (err,result) =>{
         if (err) {
             console.error('Error inserting reservation: '+err)
@@ -114,6 +115,32 @@ app.post('/reservations', (req,res) => {
     })
 })
 
+app.post('/userReservations', (req,res) => {
+    const userId = req.body.idUser
+    db.query('SELECT * FROM reservations WHERE id_user=?',[userId],(err,result)=>{
+        if (err) {
+            console.error('Error fetching user reservations: '+err)
+        }
+        if (result.length === 0) {
+            res.json({status:'no hay reservaciones'})
+        } else {
+            res.json(result)
+        }
+    })
+})
+
+app.delete('/deleteReservation', (req,res) => {
+    const reservationId = req.body.id
+    console.log(reservationId)
+    db.query('DELETE FROM reservations WHERE id_reservation=?',[reservationId], (err,result) => {
+        if (err) {
+            console.error('Error deleting reservation '+err)
+        }
+        if (result.affectedRows > 0) {
+            res.json({status:'delete succesful'})
+        }
+    })
+})
 
 
 

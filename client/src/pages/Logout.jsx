@@ -6,7 +6,7 @@ function Logout() {
   const navigate = useNavigate();
   function closeSesion() {
     localStorage.removeItem("user");
-    localStorage.removeItem("userInfo");
+    localStorage.removeItem("reservations");
     window.location.href = "/";
   }
   return (
