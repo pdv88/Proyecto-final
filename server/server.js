@@ -103,16 +103,26 @@ app.post('/menu/dinner', (req,res) => {
 
 app.post('/reservations', (req,res) => {
     const {userId,name,email,date,hour,guests,occasion} = req.body
-    db.query('INSERT INTO reservations (id_user,name,email,date,time,guests,occasion) VALUES(?,?,?,?,?,?,?)',
-    [userId,name,email,date,hour,guests,occasion], 
-    (err,result) =>{
+    db.query('SELECT * FROM reservations WHERE id_user=? AND date=? AND time=?',[userId,date,hour], (err,result) =>{
         if (err) {
-            console.error('Error inserting reservation: '+err)
-            res.json({status:'failed'})
-        } else{
-            res.json({status:'success'})
+            console.error('Error checking if reservation already exist '+err)
+        }
+        if (result.length > 0) {
+            res.json({status:'Reservation already exist'})
+        } else {
+            db.query('INSERT INTO reservations (id_user,name,email,date,time,guests,occasion) VALUES(?,?,?,?,?,?,?)',
+            [userId,name,email,date,hour,guests,occasion], 
+            (err,result) =>{
+                if (err) {
+                    console.error('Error inserting reservation: '+err)
+                    res.json({status:'failed'})
+                } else {
+                    res.json({status:'success'})
+                }
+            })
         }
     })
+
 })
 
 app.post('/userReservations', (req,res) => {

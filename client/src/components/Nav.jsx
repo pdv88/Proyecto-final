@@ -4,9 +4,6 @@ import axios from "axios";
 
 function Nav() {
 
-  const url = "https://little-lemon-server.onrender.com"
-  // const url = 'http://localhost:3000' 
-
   const user = JSON.parse(localStorage.getItem('user'))
 
 

@@ -2,22 +2,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 function BookingForm() {
+
   const url = "https://little-lemon-server.onrender.com"
-  // const url = "http://localhost:3000";
+  // const url = "http://localhost:3000"
 
   const [reservations, setReservations] = useState([]);
-
-  useEffect(() => {
-    const idUser = parseInt(JSON.parse(localStorage.getItem("user")).id_user);
-    console.log(idUser);
-    axios
-      .post(url + "/userReservations", { idUser: idUser })
-      .then((response) => {
-        console.log(response.data);
-        setReservations(response.data);
-      });
-  }, []);
-
   const [form, setForm] = useState({
     userId: parseInt(JSON.parse(localStorage.getItem("user")).id_user),
     name: "",
@@ -27,7 +16,6 @@ function BookingForm() {
     guests: "",
     occasion: "",
   });
-
   const [errors, setErrors] = useState({
     name: "",
     email: "",
@@ -36,6 +24,21 @@ function BookingForm() {
     guests: "",
     occasion: "",
   });
+
+  useEffect(() => {
+    fetchReservations()
+  }, []);
+
+  const fetchReservations = () => {
+    const idUser = parseInt(JSON.parse(localStorage.getItem("user")).id_user);
+    console.log(idUser);
+    axios
+      .post(url + "/userReservations", { idUser: idUser })
+      .then((response) => {
+        console.log(response.data);
+        setReservations(response.data);
+      });
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -53,6 +56,8 @@ function BookingForm() {
     }
     if (form.date === "") {
       errorsTemp.date = "Date is required";
+    } else if (new Date(form.date) < new Date()) {
+      errorsTemp.date = "Reservations must be made 1 day in advance"
     }
     if (form.hour === "") {
       errorsTemp.hour = "Time is required";
@@ -69,12 +74,8 @@ function BookingForm() {
       axios.post(url + "/reservations", form).then((response) => {
         if (response.data.status === "success") {
           alert("Reservation Created succesfully");
-          console.log("reserations made " + reservations);
-          if (reservations.status === "no hay reservaciones") {
-            setReservations(form);
-          } else {
-            setReservations((prevReservations) => [...prevReservations, form]);
-          }
+          console.log("resevations made " + reservations);
+          fetchReservations()
           localStorage.setItem("reservations", JSON.stringify(reservations));
           setErrors({});
           console.log("reservation " + form.userId);
@@ -85,9 +86,10 @@ function BookingForm() {
             date: "",
             hour: "",
             guests: "",
-            occasion: "",
-            id_user: null,
+            occasion: ""
           });
+        } else if(response.data.status === 'Reservation already exist') {
+          alert("Reservation already exist")
         } else {
           alert("Reservation failed, try again");
         }
@@ -114,7 +116,6 @@ function BookingForm() {
     } else {
       return reservations.map((reservation) => {
         const date = new Date(reservation.date)
-
         return (
           <>
             <div key={reservation.id_reservation} className="reservation-card">
@@ -167,7 +168,7 @@ function BookingForm() {
             onChange={handleChange}
           />
           {errors.email && <p className="error">{errors.email}</p>}
-          <label htmlFor="res-date">Choose date</label>
+          <label htmlFor="res-date">Date</label>
           <input
             type="date"
             id="res-date"
@@ -176,7 +177,7 @@ function BookingForm() {
             onChange={handleChange}
           />
           {errors.date && <p className="error">{errors.date}</p>}
-          <label htmlFor="hour">Choose time</label>
+          <label htmlFor="hour">Time</label>
           <select
             id="hour"
             value={form.hour}

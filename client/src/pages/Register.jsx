@@ -3,6 +3,9 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";
 
 function Register() {
+  
+  const url = "https://little-lemon-server.onrender.com"
+  // const url = 'localhost:3000'
 
   document.title = 'Register | Little Lemon'
 
@@ -10,8 +13,6 @@ function Register() {
   const queryParams = new URLSearchParams(location.search)
   const status = queryParams.get("status");
 
-  const url = "https://little-lemon-server.onrender.com"
-  // const url = 'localhost:3000'
 
   const [register, setRegister] = useState({
     name: "",

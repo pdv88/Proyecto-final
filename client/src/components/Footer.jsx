@@ -4,12 +4,16 @@ import foursquare from "../assets/icons_assets/foursquare.svg";
 import twitter from "../assets/icons_assets/x.svg";
 import pinterest from '../assets/icons_assets/pinterest.svg'
 import instagram from '../assets/icons_assets/instagram.svg'
+import logo from "../assets/icons_assets/Logo.svg";
 
 function Footer() {
   return (
     <>
       <footer>
         <div className="container">
+              <div>
+                <img src={logo} alt="Logo" />
+              </div>
           <div className="footer_socialsLinks">
               <div>
                 <h3>Links</h3>
