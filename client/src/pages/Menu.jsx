@@ -2,14 +2,16 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 function Menu() {
+
+  // const url = "https://little-lemon-server.onrender.com"
+  const url = 'http://localhost:3000'
+  
   document.title = "Menu | Little Lemon";
 
   const [breakfast, setBreakfast] = useState([]);
   const [lunch, setLunch] = useState([]);
   const [dinner, setDinner] = useState([]);
 
-  const url = "https://little-lemon-server.onrender.com"
-  // const url = 'http://localhost:3000'
 
   useEffect(() => {
     axios.post(url+"/menu/breakfast").then((response) => {

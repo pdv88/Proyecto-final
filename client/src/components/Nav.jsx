@@ -1,28 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 
 function Nav() {
-
-  const user = JSON.parse(localStorage.getItem('user'))
-
-
-  // const [cart, setCart] = useState(JSON.parse(localStorage.getItem("cart")))
-
   
-  // const [cartCounter, setCartCounter] = useState(cart.length)
-
+  
+  const user = JSON.parse(localStorage.getItem('user')) 
+  
+  // const [cartCounter, setCartCounter] = useState(JSON.parse(localStorage.getItem('cart')).length)  
+  // const updateCartCounter = () => {
+  //   setCartCounter(JSON.parse(localStorage.getItem('cart')).length);
+  // };
+  
   // useEffect(() => {
-
-  // }, [cart])
-
-  // useEffect(() => {
-  //   setCartCounter(cart.length)
-  // },[cartCounter])
-
-  // codigo que va en link de cart {cartCounter == 0 ? '' : cartCounter}
-
-
+  //   window.addEventListener('storage', updateCartCounter)
+  //   return () => {
+  //     window.removeEventListener('storage', updateCartCounter);
+  //   }
+  // }, []);
+  
+  // {cartCounter == 0 ? '' : cartCounter}
 
   return (
     <>
@@ -34,8 +30,9 @@ function Nav() {
           <li><Link to={'/cart'}>Cart </Link></li>
           <li>{localStorage.getItem('user')=== null ? (
             <Link to={'/login'}>Login</Link>
-          ):(
-            <Link to={'/logout'}>Hi {user.name}</Link>)}
+            ):(
+            <Link to={'/logout'}>Hi {user.name}</Link>
+            )}
             </li>
         </ul>
       </nav>

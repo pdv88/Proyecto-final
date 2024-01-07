@@ -152,6 +152,12 @@ app.delete('/deleteReservation', (req,res) => {
     })
 })
 
+// ------Peticiones Ordenes------
+
+app.post('/order', (req,res) => {
+    console.log(req.body)
+    // db.query('INSERT INTO orders ')
+})
 
 
 // =================================Conexion=================================

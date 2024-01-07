@@ -71,7 +71,7 @@ function Register() {
       axios.post(url+'/register', register).then(result => {
         if (result.data.status === 'success') {
           alert("Account register successful")
-          window.location.href = '/'
+          window.history.back()
         } else if(result.data.status = 'email ya en uso') {
           setErrors(...errors, errors.mail = 'email ya en uso' )
         }

@@ -30,7 +30,7 @@ function Login() {
           console.log(result.data)
           if (result.data.status === "success") {
             localStorage.setItem("user", JSON.stringify(result.data[0]));
-            window.location.href = "/";
+            window.history.back()
           } else {
             setLogin({
               ...login,
