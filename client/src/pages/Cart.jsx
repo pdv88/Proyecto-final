@@ -4,7 +4,7 @@ import axios from "axios";
 
 function Cart() {
   const url = "https://little-lemon-server.onrender.com"
-//   const url = "localhost:3000"
+  // const url = "http://localhost:3000"
 
   document.title = "Cart | Little Lemon";
 
@@ -26,8 +26,8 @@ function Cart() {
         newCart.push(cart[i]);
       }
     }
-    setCart(newCart);
     localStorage.setItem("cart", JSON.stringify(newCart));
+    setCart(newCart);
   }
 
   function buyCart() {

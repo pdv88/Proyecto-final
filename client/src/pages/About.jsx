@@ -1,4 +1,6 @@
 import React from "react";
+import aboutImg from '../assets/icons_assets/mario_adrian_a.jpg';
+import aboutImg2 from '../assets/icons_assets/mario_and_adrianb.jpg'
 
 function About() {
   document.title = "About | Little Lemon";
@@ -7,6 +9,7 @@ function About() {
       <section id="about">
         <div className="container">
           <h1>About Us</h1>
+          <img src={aboutImg} alt="" />
           <p>
             Welcome to Mario and Adrian’s Traditional Italian Restaurant!
             Nestled in the heart of Chicago, we are a family-owned restaurant
@@ -26,6 +29,7 @@ function About() {
             place where people could enjoy authentic Italian cuisine, just like
             Nonna used to make, in a cozy and friendly environment.
           </p>
+          <img src={aboutImg2} alt="" />
           <p>
             Our menu is a testament to the brothers’ roots, featuring a variety
             of traditional dishes from different regions of Italy. From the

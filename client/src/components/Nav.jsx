@@ -8,8 +8,11 @@ function Nav() {
   
   // const [cartCounter, setCartCounter] = useState(JSON.parse(localStorage.getItem('cart')).length)  
   // const updateCartCounter = () => {
+  //   console.log('hola')
   //   setCartCounter(JSON.parse(localStorage.getItem('cart')).length);
   // };
+
+  // {cartCounter == 0 ? '' : cartCounter} code for cart link
   
   // useEffect(() => {
   //   window.addEventListener('storage', updateCartCounter)
@@ -18,7 +21,7 @@ function Nav() {
   //   }
   // }, []);
   
-  // {cartCounter == 0 ? '' : cartCounter}
+  
 
   return (
     <>
@@ -27,7 +30,7 @@ function Nav() {
           <li><Link to={'/about'}>About</Link></li>
           <li><Link to={'/menu'}>Menu</Link></li>
           <li><Link to={'/reservations'}>Reservations</Link></li>
-          <li><Link to={'/cart'}>Cart </Link></li>
+          <li><Link to={'/cart'}>Cart</Link></li>
           <li>{localStorage.getItem('user')=== null ? (
             <Link to={'/login'}>Login</Link>
             ):(

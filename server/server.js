@@ -70,6 +70,43 @@ app.post('/register', (req,res) => {
     })
 })
 
+// ------Eliminacion de cuenta de usuario------
+
+app.delete('/deleteAccount', (req,res) => {
+    const {userId} = req.body
+    console.log(userId)
+    db.query('DELETE FROM users WHERE id_user=?',[userId], (err,result) =>{
+        if (err) {
+            console.error('Error deleting account: '+err)
+        }
+        if (result.affectedRows > 0) {
+            res.json({status:'Account deleted'})
+        }
+    })
+})
+
+// ------Peticion actualizacion datos de usuario------
+
+app.put('/updateUserInfo', (req,res) => {
+    const {name, lastname, phone} = req.body.updatedUser
+    const userId = req.body.userId
+    db.query('UPDATE users SET name=?, lastname=?, phone=? WHERE id_user=?',[name, lastname, phone, userId], (err,result)=>{
+        if (err) {
+            console.error('Error al actualizar usuario: '+err)
+        }
+        if (result.affectedRows > 0) {
+            db.query("SELECT id_user,name,lastname,phone,mail FROM users WHERE id_user=?",[userId], (err,result) => {
+                if (err) {
+                    console.error('Error fetching user data: '+err)
+                }
+                if (result.length > 0) {
+                    res.status(200).json(result)
+                }
+            })
+        }
+    })
+})
+
 // ------Peticiones de menu------
 
 app.post('/menu/breakfast', (req,res) => {
@@ -154,10 +191,14 @@ app.delete('/deleteReservation', (req,res) => {
 
 // ------Peticiones Ordenes------
 
-app.post('/order', (req,res) => {
-    console.log(req.body)
-    // db.query('INSERT INTO orders ')
-})
+// app.post('/order', (req,res) => {
+//     console.log(req.body)
+//     db.query('INSERT INTO orders ')
+//     for (let i = 0; cart < cary.length; i++) {
+//         db.query(insert cart[i])
+        
+//     }
+// })
 
 
 // =================================Conexion=================================

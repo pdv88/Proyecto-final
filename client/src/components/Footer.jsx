@@ -11,7 +11,7 @@ function Footer() {
     <>
       <footer>
         <div className="container">
-              <div>
+              <div className="footerLogo">
                 <img src={logo} alt="Logo" />
               </div>
           <div className="footer_socialsLinks">

@@ -15,7 +15,7 @@
   --error:rgb(255, 99, 99);
   /* widths & heights */
   --maxContainerWidth:900px;
-  --headerHeight: 4.5rem;
+  --headerHeight: 4.9rem;
   /* shadows */
   --greenCardShadow: 10px 10px 40px #3e504a, -10px -10px 40px #546c64;
   --whiteCardShadow: 10px 10px 40px #c9cbca, -10px -10px 40px #ffffff;
@@ -35,6 +35,7 @@
 }
 body{
   height: 100svh;
+  background: linear-gradient(145deg, #c0c0c0, #e4e4e4);
 }
 
 ::-webkit-scrollbar{
@@ -57,7 +58,6 @@ body{
 
 button{
   background:var(--bgGradientYellow);
-  font-family: 'Markazi Text', serif;
   font-weight: bold;
   font-size: 1.2rem;
   width: fit-content;
@@ -83,7 +83,6 @@ button:active{
 }
 .secondaryButton:hover{
   background-color: transparent;
-  box-shadow: none;
   background: none;
 }
 .addToCart{
@@ -108,6 +107,13 @@ h1{
   color: var(--yellow900);
   font-size: 4rem;
   line-height: 4rem;
+  text-shadow: 5px 5px 10px #2f3d39,
+  -5px -5px 10px #637d74;
+}
+h2 {
+  text-shadow: 3px 3px 6px #32433e,
+  -3px -3px 6px #657d74;
+  color: var(--beige900);
 }
 label{
   color: var(--white900);
@@ -120,10 +126,11 @@ input, select{
   width: 100%;
   padding: .5rem 1rem;
   font-size: 1.2rem;
-  border-radius: .5rem;
+  border-radius: 1rem;
   border: none;
-  background: linear-gradient(145deg, #4e655d, #42554e);
-  box-shadow: var(--greenCardShadow);
+  background: var(--green900);
+  box-shadow:   inset 5px 5px 10px #3f514b,
+  inset -5px -5px 10px #536b63;
   color: var(--white900);
 }
 input:focus, .bookingForm select:focus{
@@ -143,19 +150,29 @@ input:focus, .bookingForm select:focus{
 
 header{
   display: flex;
+  background-color: var(--green900);
   justify-content: center;
   height: var(--headerHeight);
-  box-shadow: var(--greenCardShadow);
-  background: linear-gradient(145deg, #d5d7d6, #feffff);
   z-index: 2;
 }
 header .container{
   display: flex;
+  border-radius: 0 0 2.5rem 2.5rem;
+  background: linear-gradient(145deg, #c0c0c0, #e4e4e4);
+  box-shadow: 6px 6px 12px #2f3e3a,
+  -6px -6px 12px #6f867d;
   justify-content: space-between;
-  max-width: var(--maxContainerWidth);
+  margin: 0 2rem;
   width: 100%;
   padding: 1rem;
   justify-self: center;
+}
+header img{
+  background: linear-gradient(145deg, #efefef, #bdbebd);
+  padding: .2rem 1rem;
+  border-radius: 1.5rem;
+  box-shadow: 4px 4px 10px #989898,
+  -4px -4px 10px #ffffff;
 }
 ul{
   display: flex;
@@ -164,7 +181,6 @@ ul{
 }
 li{
   list-style: none;
-  font-weight: bold;
   text-align: center;
 }
 li:hover{
@@ -173,36 +189,43 @@ li:hover{
 nav{
   align-self: center;
 }
-nav a:hover{
-  background: linear-gradient(145deg, #d5d7d6, #feffff);
-  box-shadow: var(--whiteLinkShadow);
-  transition: all 300ms;
-}
 nav a{
   text-decoration: none;
-  background-color: #f4cf1400;
   transition: all 300ms;
   padding: .5rem 1rem;
-  border-radius: .5rem;
+  border-radius: 2rem;
+  transition: all 300ms;
+  text-shadow: 2px 2px 4px #585858,
+  -2px -2px 4px #ffffff;
+}
+nav a:hover{
+  background: linear-gradient(145deg, #feffff, #d5d7d6);
+  transition: all 300ms;
+  box-shadow:  3px 3px 5px #acacac,
+             -3px -3px 5px #f3f3f3;
+}
+nav a:active{
+  background: linear-gradient(145deg, #d5d7d6, #feffff);
 }
 .burger{
   display: none;
   cursor: pointer;
+  align-self: center;
+
 }
 .burgerMenu{
   display: flex;
   z-index: 1;
   position: fixed;
   top: var(--headerHeight);
+  left: calc(50% - (263px/2));
   text-align: center;
-  justify-self: flex-end;
-  background-color: var(--white900_50);
-  backdrop-filter: blur(10px);
-  width: 100%;
-  padding: 1rem;
+  background: linear-gradient(145deg, #d5d7d6, #feffff);
+  width: fit-content;
+  padding: 2rem;
   justify-content: center;
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
-  border-radius: 0 0 1rem 1rem;
+  border-radius: 3rem;
   animation-name: menuSlideIn;
   animation-duration: 300ms;
 }
@@ -211,14 +234,21 @@ nav a{
   gap: 2rem;
   padding: 2rem;
   font-size: 1.5rem;
+  border-radius: 2rem;
+  box-shadow: inset 4px 4px 10px #989898,
+  inset -4px -4px 10px #ffffff;
 }
 .burgerMenu a{
   font-family: 'Markazi Text', serif;
 }
 
-@media screen and (max-width: 750px){
+
+@media screen and (max-width: 900px){
   .burger{
     display: block;
+  }
+  header .container {
+    margin: 0 1rem;
   }
   header .container nav{
     display: none;
@@ -295,6 +325,7 @@ nav a{
   justify-content: center;
   width: 100%;
   padding: 1rem 0;
+
 }
 .highlights .container{
   display: flex;
@@ -308,6 +339,10 @@ nav a{
   width: 100%;
   justify-content: space-between;
   align-items: center;
+}
+.title-container h1{
+  text-shadow: 2px 2px 3px rgb(179, 179, 179),
+               2px 2px 3px rgb(255, 255, 255);
 }
 .cards-container{
   display: flex;
@@ -362,11 +397,9 @@ nav a{
 #about{
   display: flex;
   min-height: calc(100svh - var(--headerHeight));
+  background-color: var(--green900);
   justify-content: center;
   align-items: center;
-  background-image: url(./assets/icons_assets/mario_adrian_a.jpg);
-  background-size: cover;
-  background-repeat: no-repeat;
   text-align: center;
 }
 #about .container{
@@ -374,12 +407,21 @@ nav a{
   flex-direction: column;
   gap: 1rem;
   max-width: var(--maxContainerWidth);
-  background-color: var(--green900_50);
+  background: var(--bgGradientGreen);
   backdrop-filter: blur(20px); 
   height: auto;
-  border-radius: 1rem;
+  border-radius: 3rem;
   padding: 2rem; 
-  margin: 1rem;
+  margin: 2rem 1rem;
+  box-shadow: 6px 6px 15px #2f3e3a,
+  -6px -6px 15px #597067;
+}
+#about img{
+  width:100%;
+  border-radius: 2rem;
+  box-shadow: 6px 6px 12px #2f3e3a,
+  -6px -6px 12px #597067;
+
 }
 #about p, #about strong{
   color: var(--white900);
@@ -418,6 +460,8 @@ nav a{
 #reservations h1{
   padding-bottom: 1rem;
   align-self: center;
+  text-shadow: 5px 5px 10px #374742,
+   -5px -5px 10px #5b756c;
 }
 .bookingForm{
   display: flex;
@@ -426,7 +470,10 @@ nav a{
 }
 input.submitButton{
   margin-top: 1rem;
+  border-radius: 1rem;
   background: var(--bgGradientYellow);
+  box-shadow: 5px 5px 10px #384944,
+  -5px -5px 10px #5d756c;
   color: var(--black900);
   cursor: pointer;
   font-weight: bold;
@@ -443,10 +490,12 @@ input.submitButton:hover{
   -13px -13px 25px #4f665e;
   border-radius: 2rem;
   gap: .5rem;
-  min-width: 15rem;
+  width: 17rem;
 }
 .reservation-card button{
   align-self: center;
+  margin-top: 1rem;
+  width: 100%;
   background: var(--bgGradientYellow);
 }
 .reservation-card h2{
@@ -457,6 +506,10 @@ input.submitButton:hover{
 .reservation-card h3, 
 .reservation-card strong {
   color: var(--white900);
+}
+.reservation-card button {
+  box-shadow: 5px 5px 10px #384944,
+  -5px -5px 10px #5d756c;
 }
 .form-reservations-container{
   display: flex;
@@ -512,12 +565,19 @@ input.submitButton:hover{
 
 #logout{
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 2rem 1rem;
   min-height: calc(100svh - var(--headerHeight));
   background-color: var(--green900);
 }
 #logout .container{
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-bottom: 2rem;
+  max-width: 30rem;
   background:linear-gradient(145deg, #42554e, #4e655d);
   padding: 3rem;
   box-shadow: var(--greenCardShadow);
@@ -529,6 +589,32 @@ input.submitButton:hover{
   flex-direction: column;
   width: 100%;
   padding: 1rem;
+}
+#logout form{
+  display: flex;
+  flex-direction: column;
+}
+#logout button{
+  box-shadow: 5px 5px 10px #384944,
+  -5px -5px 10px #5d756c;
+}
+#logout .secondaryButton{
+  box-shadow: none;
+}
+.submitBtn{
+  width: fit-content;
+  align-self: center;
+  margin-top: 1rem;
+  background: var(--bgGradientYellow);
+  box-shadow: 5px 5px 10px #384944,
+  -5px -5px 10px #5d756c;
+  color: var(--black900);
+  font-weight: bold;
+}
+.modalDeleteAccount, .modalDeleteAccount h2{
+  text-align: center;
+  align-items: center;
+  gap: 1rem;
 }
 
 /* -------------------Register-------------------- */
@@ -574,19 +660,12 @@ input.submitButton:hover{
   width: 100%;
   margin: 1rem;
 }
-#menu h2{
-  color: var(--beige900);
-  z-index: 1;
-}
 .cards_container{
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   width: 100%;
   gap: 1rem;
-}
-.cards_container::-webkit-scrollbar {
-  display: none;
 }
 .dishCard{
   display: flex;
@@ -598,13 +677,14 @@ input.submitButton:hover{
   min-width: 18rem;
   background: linear-gradient(145deg, #42554e, #4e655d);
   border-radius: 1rem;
-  box-shadow: var(--greenCardShadow)
+  box-shadow: 5px 5px 10px #3b4e49,
+  -5px -5px 10px #576e66;
 }
 .dishCard img {
   width: 18rem;
   height: 12rem;
   object-fit: cover;
-  /* box-shadow: 0px 0px 20px black; */
+  box-shadow: 0px 0px 20px black;
 }
 .dishCard_datos{
   display: flex;
@@ -646,6 +726,7 @@ input.submitButton:hover{
 }
 .cartCardContainer{
   display: flex;
+  max-width: 80rem;
   align-items: center;
   padding: 1rem 0;
   gap: 1.5rem;
@@ -655,10 +736,11 @@ input.submitButton:hover{
   height: 6rem;
   width: 100%;
   max-width: 20rem;
-  background: var(--bgGradientGreen);
+  background:linear-gradient(145deg, #42554e, #455c54);
   border-radius: 2rem;
   overflow: hidden;
-  box-shadow: var(--greenCardShadow);
+  box-shadow: 5px 5px 15px #384944,
+  -5px -5px 15px #5d756c;
 }
 .cartItemCard_data{
   display: flex;
@@ -676,7 +758,7 @@ input.submitButton:hover{
 .cartList{
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: center;
 }
 .cartItemCard_data p, .cartItemCard_data span{
   color: var(--white900);
@@ -696,9 +778,10 @@ input.submitButton:hover{
   padding: 1rem;
   align-items: end;
   gap: 1rem;
-  background: var(--bgGradientGreen);
+  background:linear-gradient(145deg, #42554e, #455c54);
   border-radius: 2rem;
-  box-shadow: var(--greenCardShadow);
+  box-shadow: 5px 5px 15px #384944,
+  -5px -5px 15px #5d756c;
 }
 .cartTotal p {
   color: var(--white900);
@@ -711,6 +794,8 @@ input.submitButton:hover{
 .checkoutBtn{
   width: 100%;
   border-radius: 1rem;
+  box-shadow: 5px 5px 15px #2d3c38,
+  -5px -5px 15px #5d756c;
 }
 @media screen and (max-width: 900px) {
   .cartCardContainer{
@@ -722,10 +807,6 @@ input.submitButton:hover{
     align-items: center;
     margin-top: 1rem;
   }
-  .cartItemCard{
-    
-  }
-
 }
 
 
@@ -738,17 +819,32 @@ footer{
   justify-content: space-between;
   align-items: center;
   background-color: var(--beige500);
-  padding: 2rem 1rem;
-  bottom: 0px;
+  padding: 2rem 2rem;
 }
 footer .container{
   display: flex;
   flex-direction: column;
   align-content: space-between;
   gap: 1rem;
+  padding: 1rem 0;
   width: 100%;
-  max-width: var(--maxContainerWidth);
   text-align: center;
+  border-radius: 2rem;
+  box-shadow:  inset 5px 5px 10px #d0b59b,
+  inset -5px -5px 10px #fafadf;
+}
+.footerLogo{
+  background: linear-gradient(145deg, #ffe9c8, #e2c4a8);
+  padding: .5rem 2rem;
+  border-radius: 3rem;
+  width: fit-content;
+  align-self: center;
+  box-shadow:  5px 5px 10px #d0b59b,
+  -5px -5px 10px #fafadf;
+}
+footer h3{
+  text-shadow:  2px 2px 3px #b4967b,
+  -2px -2px 3px #ffffe0;
 }
 .footer_socialsLinks{
   display: grid;
@@ -756,8 +852,6 @@ footer .container{
   justify-content: space-between;
   gap: 1rem;
 }
-
-
 @media screen and (max-width: 576px) {
   .footer_socialsLinks{
     grid-template-columns: 1fr;
