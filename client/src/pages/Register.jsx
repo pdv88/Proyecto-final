@@ -92,27 +92,27 @@ function Register() {
         >
           <label htmlFor="name">Name: </label>
           <input type="text" name="name" id="name2" onChange={handleChange} value={register.name} />
-          {errors.name && <p>{errors.name}</p> }
+          {errors.name && <p className="error">{errors.name}</p> }
 
           <label htmlFor="lastname">Lastname: </label>
           <input type="text" name="lastname" id="lastname" onChange={handleChange} value={register.lastname} />
-          {errors.lastname && <p>{errors.lastname}</p> }
+          {errors.lastname && <p className="error">{errors.lastname}</p> }
 
           <label htmlFor="phone">Phone: </label>
           <input type="number" name="phone" id="phone" onChange={handleChange} value={register.phone} />
-          {errors.phone && <p>{errors.phone}</p> }
+          {errors.phone && <p className="error">{errors.phone}</p> }
 
           <label htmlFor="mail">Email:</label>
           <input type="text" name="mail" id="mail" onChange={handleChange} value={register.mail} />
-          {errors.mail && <p>{errors.mail}</p> }
+          {errors.mail && <p className="error">{errors.mail}</p> }
 
           <label htmlFor="pass">Password: </label>
           <input type="password" name="password" id="pass2" onChange={handleChange} value={register.password} />
-          {errors.password && <p>{errors.password}</p> }
+          {errors.password && <p className="error">{errors.password}</p> }
 
           <label htmlFor="pass">Confirm password: </label>
           <input type="password" name="confirmPassword" id="confirmPassword" onChange={handleChange} value={register.confirmPassword} />
-          {errors.confirmPassword && <p>{errors.confirmPassword}</p> }
+          {errors.confirmPassword && <p className="error">{errors.confirmPassword}</p> }
 
           <button type="submit">Submit</button>
         </form>
