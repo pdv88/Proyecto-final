@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 function Cart() {
-  const url = "https://little-lemon-server.onrender.com"
-  // const url = "http://localhost:3000"
+  // const url = "https://little-lemon-server.onrender.com"
+  const url = "http://localhost:3000"
 
   document.title = "Cart | Little Lemon";
 

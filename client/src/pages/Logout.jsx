@@ -4,9 +4,10 @@ import axios from 'axios'
 
 function Logout() {
 
+  // const url = "https://little-lemon-server.onrender.com"
+  const url = 'http://localhost:3000'
+  
   document.title = 'Logout | Little Lemon'
-    const url = "https://little-lemon-server.onrender.com"
-    // const url = 'http://localhost:3000'
 
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem('user'))

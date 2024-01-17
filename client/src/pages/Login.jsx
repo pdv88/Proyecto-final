@@ -3,41 +3,48 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 function Login() {
-
-  const url = "https://little-lemon-server.onrender.com"
-  // const url = 'http://localhost:3000' 
+  // const url = "https://little-lemon-server.onrender.com"
+  const url = "http://localhost:3000";
 
   document.title = "Login | Little Lemon";
 
   const [login, setLogin] = useState({ mail: "", password: "", error: "" });
-  const [errors, setErrors] = useState({mail:'', password:''})
-  
+  const [errors, setErrors] = useState({ mail: "", password: "" });
 
   function handleLogin(e) {
     e.preventDefault();
-    let errorsTemp = {}
-    if(login.mail === ''){
-      errorsTemp.mail = 'Please input your mail'
+    let errorsTemp = {};
+    if (login.mail === "") {
+      errorsTemp.mail = "Please input your mail";
     }
-    if (login.password === '') {
-      errorsTemp.password = 'Please input your password'
+    if (login.password === "") {
+      errorsTemp.password = "Please input your password";
     }
     if (Object.keys(errorsTemp).length > 0) {
-      setErrors(errorsTemp)
+      setErrors(errorsTemp);
     } else {
-      axios.post(url+"/login", login)
-        .then((result) => {
-          console.log(result.data)
-          if (result.data.status === "success") {
-            localStorage.setItem("user", JSON.stringify(result.data[0]));
-            window.history.back()
-          } else {
+      axios.post(url + "/login", login).then((result) => {
+        switch (result.data.status) {
+          case "success":
+            localStorage.setItem("user", JSON.stringify(result.data));
+            location.reload()
+            window.location.href='/'
+            break;
+          case "failed user":
             setLogin({
               ...login,
-              error: "Usuario no encontrado, intentalo de nuevo",
+              error: "Incorrect mail, please try again",
             });
-          }
-        });
+          case "failed password":
+            setLogin({
+              ...login,
+              error: "Incorrect password, please try again",
+            });
+            break;
+          default:
+            break;
+        }
+      });
     }
   }
 
@@ -80,7 +87,8 @@ function Login() {
             <input type="submit" value="Enviar" className="submitButton" />
           </form>
           <p>
-            Don't have an account? <br /><Link to={"/register"}>Register here</Link>
+            Don't have an account? <br />
+            <Link to={"/register"}>Register here</Link>
           </p>
         </div>
       </section>
