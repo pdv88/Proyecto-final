@@ -40,15 +40,15 @@ function Main() {
               ></img>
               <div className="card-data">
               <div className="card-title">
-                <h3>Greek Salad</h3>
-                <p className="card-price">$12.99</p>
+                <h2>Greek Salad</h2>
               </div>
               <p>
-                The famous greek salad of crispy lettuce, peppers, olives and
+                The greek salad of crispy lettuce, peppers, olives and
                 our Chicago style feta cheese, garnished with crunchy garlic and
                 rosemary croutons.
               </p>
-              <button className="addToCart">Order a delivery</button>
+                <p className="card-price">$12.99</p>
+              <button className="addToCart" onClick={()=>navigate('/menu')}>Order a delivery</button>
               </div>
             </div>
             <div className="card">
@@ -59,13 +59,13 @@ function Main() {
               ></img>
               <div className="card-data">
               <div className="card-title">
-                <h3>Bruchetta</h3>
-                <p className="card-price">$5.99</p>
+                <h2>Bruchetta</h2>
               </div>
               <p>
                 Our Bruschetta is made from grilled bread that has been smeared with garlic and seasoned with salt and olive oil.
               </p>
-              <button className="addToCart">Order a delivery</button>
+                <p className="card-price">$5.99</p>
+              <button className="addToCart" onClick={()=>navigate('/menu')}>Order a delivery</button>
               </div>
             </div>
             <div className="card">
@@ -76,13 +76,13 @@ function Main() {
               ></img>
               <div className="card-data">
               <div className="card-title">
-                <h3>Lemon Dessert</h3>
-                <p className="card-price">$5.00</p>
+                <h2>Lemon Dessert</h2>
               </div>
               <p>
                 This comes straight from grandma's recipe book, every last ingredient has been sourced and is as authentic as can be imagined.
               </p>
-              <button className="addToCart">Order a delivery</button>
+                <p className="card-price">$5.00</p>
+              <button className="addToCart" onClick={()=>navigate('/menu')}>Order a delivery</button>
               </div>
             </div>
           </div>

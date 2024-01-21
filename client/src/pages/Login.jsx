@@ -3,8 +3,9 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 function Login() {
+  // variables URL para facil cambio de local a servidor durante desarrollo
   const url = "https://little-lemon-server.onrender.com"
-  // const url = "http://localhost:3000"
+  // const url = "http://localhost:3000";
 
   document.title = "Login | Little Lemon";
 
@@ -13,41 +14,50 @@ function Login() {
 
   function handleLogin(e) {
     e.preventDefault();
+    // se reinician los valores de los errores
+    setErrors({ mail: "", password: "" });
+    setLogin({ ...login, error: "" });
     let errorsTemp = {};
+    // validacion de email no vacio
     if (login.mail === "") {
       errorsTemp.mail = "Please input your mail";
     }
+    // validacion de Contraseña no vacia
     if (login.password === "") {
       errorsTemp.password = "Please input your password";
     }
+    // condicional si existen errores
     if (Object.keys(errorsTemp).length > 0) {
       setErrors(errorsTemp);
     } else {
+      // si no existen errores se procede a hacer la peticion
       axios.post(url + "/login", login).then((result) => {
         switch (result.data.status) {
+          // respuesta positiva hace un archivo user en localstorage para guardar la info del usuario
           case "success":
             localStorage.setItem("user", JSON.stringify(result.data));
-            location.reload()
-            window.location.href='/'
+            window.location.href = "/";
             break;
-          case "failed user":
-            setLogin({
-              ...login,
-              error: "Incorrect mail, please try again",
-            });
-          case "failed password":
+            // en caso de error de contraseña se muestra contraseña incorrecta
+          case "passwordFail":
             setLogin({
               ...login,
               error: "Incorrect password, please try again",
             });
             break;
+            // en caso de no encontrar el mail se muestra mail incorrecto
+          case "userFail":
+            setLogin({
+              ...login,
+              error: "Incorrect mail, please try again",
+            });
           default:
             break;
         }
       });
     }
   }
-
+  // funcion de manejo de cambio en el imput para actualizar valores de login
   function handleChange(e) {
     let name = e.target.name;
     let valor = e.target.value;
@@ -84,9 +94,9 @@ function Login() {
               value={login.password}
             />
             {errors.mail && <p className="error">{errors.password}</p>}
-            <input type="submit" value="Enviar" className="submitButton" />
+            <input type="submit" value="Login" className="submitButton" />
           </form>
-          <p>
+          <p className="registerLink">
             Don't have an account? <br />
             <Link to={"/register"}>Register here</Link>
           </p>

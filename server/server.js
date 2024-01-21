@@ -2,8 +2,10 @@
 
 const express = require("express");
 const cors = require("cors");
+// se Eligio SQL para la base de datos para relacionar tablas de reservaciones con usuarios
 const mysql = require("mysql");
 const bodyParser = require("body-parser");
+// se usa brcyptjs en vez de bcrypt porque causa problemas en render.com
 const bcrypt = require("bcryptjs");
 
 const app = express();
@@ -14,6 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 require("dotenv").config();
 
+// variables de entorno guardadas en el archivo .env
 const db = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
@@ -24,45 +27,35 @@ const db = mysql.createConnection({
 // =============================Peticiones==================================
 
 // -----Peticion para login--------
-
+// peticion asincrona donde se busca el correo introducido, de no existir se regresa 
+// un status de usuario incorrecto. si el correo existe entonces se compara la 
+// contraseña introducida con la contraseña encriptada y de ser correcta se regresa
+//  una respuesta positiva
 app.post("/login", async (req, res) => {
   const { mail, password } = req.body;
   db.query("SELECT * FROM users WHERE mail=?", [mail], async (err, result) => {
     if (err) {
-        console.error('Error fetching user by mail: '+err)
+      console.error("Error fetching user by mail: " + err);
     }
-    if (result.length > 0) {
+    if(result.length===0){
+      res.json({ status: "userFail" });
+    } else {
       const hashedPassword = await bcrypt.compare(password, result[0].password);
       if (hashedPassword) {
-        const {password, ...user} = result[0]
+        const { password, ...user } = result[0];
         res.json({ ...user, status: "success" });
       } else {
-        res.json({ status: "failed password" });
+        res.json({ status: "passwordFail" });
       }
-    } else {
-      res.json({ status: "failed user" });
-    }
+    } 
   });
 });
 
-// ------peticion de informacion de usuario------
-
-app.post("/user", (req, res) => {
-  const userMail = req.body.mail;
-  db.query(
-    "SELECT id_user,name,lastname,phone FROM users WHERE mail=?",
-    [userMail],
-    (err, result) => {
-      if (err) {
-        console.error("Error fetching user data: " + err);
-      } else {
-        res.json(result);
-      }
-    }
-  );
-});
-
 // ------Peticion para registro------
+// se hace una peticion con el metodo post donde primero se verifica si el 
+// correo ingresado existe en la base de datos, de no existir se avanza con 
+// el ingreso de los datos en la base de datos y regresa toda la informacion 
+// del usuario encriptando la contraseña primero.
 
 app.post("/register", async (req, res) => {
   console.log();
@@ -87,6 +80,8 @@ app.post("/register", async (req, res) => {
 });
 
 // ------Eliminacion de cuenta de usuario------
+// se hace una peticion con el metodo delete donde se elimna la cuenta 
+// del usuario buscando la id del usuario
 
 app.delete("/deleteAccount", (req, res) => {
   const { userId } = req.body;
@@ -102,6 +97,8 @@ app.delete("/deleteAccount", (req, res) => {
 });
 
 // ------Peticion actualizacion datos de usuario------
+// Hace la actualizacion de los datos usando el metodo put y este regresa 
+// la informacion del usuario actualizada para hacer el archivo de local storage
 
 app.put("/updateUserInfo", (req, res) => {
   const { name, lastname, phone } = req.body.updatedUser;
@@ -132,6 +129,8 @@ app.put("/updateUserInfo", (req, res) => {
 });
 
 // ------Peticiones de menu------
+// peticiones usando el metodo post que leen los platillos de la base de 
+// datos para mostrar en la pagina de menu
 
 app.post("/menu/breakfast", (req, res) => {
   db.query('SELECT * FROM dishes WHERE type="breakfast"', (err, result) => {
@@ -162,6 +161,9 @@ app.post("/menu/dinner", (req, res) => {
 
 // ------Peticiones de reservaciones------
 
+// peticion para crear una reservacion donde primero se verifica si el usuario 
+// ya tiene una reservacion hecha para esa fecha y hora, de no haber una 
+// reservacion existente se prosigue al registro de la reservacion 
 app.post("/reservations", (req, res) => {
   const { userId, name, email, date, hour, guests, occasion } = req.body;
   db.query(
@@ -191,6 +193,8 @@ app.post("/reservations", (req, res) => {
   );
 });
 
+// peticion para leer todas las reservaciones hechas por el usuario para 
+// mostrarlas en la pagina de reservacoines
 app.post("/userReservations", (req, res) => {
   const userId = req.body.idUser;
   db.query(
@@ -209,6 +213,7 @@ app.post("/userReservations", (req, res) => {
   );
 });
 
+// peticion para eliminar reservaciones usando la id de la reservacion y el metodo delete
 app.delete("/deleteReservation", (req, res) => {
   const reservationId = req.body.id;
   console.log(reservationId);
@@ -225,17 +230,6 @@ app.delete("/deleteReservation", (req, res) => {
     }
   );
 });
-
-// ------Peticiones Ordenes------
-
-// app.post('/order', (req,res) => {
-//     console.log(req.body)
-//     db.query('INSERT INTO orders ')
-//     for (let i = 0; cart < cary.length; i++) {
-//         db.query(insert cart[i])
-
-//     }
-// })
 
 // =================================Conexion=================================
 

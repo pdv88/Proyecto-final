@@ -4,16 +4,14 @@ import { useLocation } from "react-router-dom";
 
 function Register() {
   
+  // variables URL para facil cambio de local a servidor durante desarrollo
   const url = "https://little-lemon-server.onrender.com"
   // const url = 'http://localhost:3000'
 
+  // cambio de titulo del documento
   document.title = 'Register | Little Lemon'
 
-  const location = useLocation()
-  const queryParams = new URLSearchParams(location.search)
-  const status = queryParams.get("status");
-
-
+  // usestate para almacenar y actualizar los valores del registro
   const [register, setRegister] = useState({
     name: "",
     lastname: "",
@@ -23,12 +21,14 @@ function Register() {
     phone:0
   });
 
+  // funcion para el manejo de cambios y actualizacion de los valores del registro
   function handleChange(e) {
     setRegister({...register, [e.target.name]:e.target.value})
   }
   
   const [errors, setErrors] = useState({})
   
+  // funcion para la validacion de los valores ingresados que devuelve los errores 
   function validate(values){
     let errors = {}
     if (!values.name) {
@@ -62,7 +62,7 @@ function Register() {
     return errors
   }
   
-
+  // funcion de manejo de registro que valida si existen errores primero, de no existir errores se hace la peticion de registro con metodo post. Se valida en servidor si el correo introducido ya esta en uso.
   function handleRegister(e){
     e.preventDefault()
     const errors = validate(register)

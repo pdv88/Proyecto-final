@@ -3,14 +3,17 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 function Cart() {
+  // variables URL para facil cambio de local a servidor durante desarrollo
   const url = "https://little-lemon-server.onrender.com"
   // const url = "http://localhost:3000"
-
+  
+  // cambio de titulo del documento
   document.title = "Cart | Little Lemon";
 
   const [cart, setCart] = useState([]);
   let totalCart = 0;
 
+  // useEffect para obtener carritos pasados
   useEffect(() => {
     let cart = localStorage.getItem("cart");
     if (cart) {
@@ -18,6 +21,7 @@ function Cart() {
     }
   }, []);
 
+  // funcion que hace quita del carrito el item seleccionado y actualiza los valores del carrito y del localstorage
   function deleteProduct(index) {
     let newCart = [];
     let cart = JSON.parse(localStorage.getItem("cart"));
@@ -30,11 +34,11 @@ function Cart() {
     setCart(newCart);
   }
 
+  // funcion que concluye la orden, se completara en un futuro pero por ahora muestra un mensaje de confirmacion y reinicia los valores del carrito
   function buyCart() {
-    axios.post(url + "/order", cart).then((response) => {
-      console.log("peticion enviada");
-    });
-    // setCart([]);
+    alert("Order recieved!!")
+    setCart([]);
+    localStorage.removeItem('cart')
   }
 
   return (
@@ -44,6 +48,7 @@ function Cart() {
           <h1>Cart</h1>
           <div className="cartCardContainer">
             <ul className="cartList">
+              {/* toma los valores del carrito y los muestra en forma de cards */}
               {cart.map((product, index) => {
                 totalCart += product.price;
                 return (
@@ -64,6 +69,7 @@ function Cart() {
                 );
               })}
             </ul>
+            {/* si existen items en el carrito muestra un div con el subtotal, impuestos, envio y total del carrito. de no haber items en el carrito solo muestra que el carrito esta vacio */}
             {cart.length !== 0 ? (
               <div className="cartTotal">
                 <p>Subtotal €{(totalCart * 0.85).toFixed(2)}</p>
@@ -71,10 +77,12 @@ function Cart() {
                 <p>Delivery {totalCart > 20 ? "Free" : "€2"}</p>
                 <h2>
                   Your total is €
+                  {/* si el total es mayor a 20 el envio es gratis, de lo contrario se cobrara $2 de envio */}
                   {totalCart > 20
                     ? totalCart.toFixed(2)
                     : (totalCart + 2).toFixed(2)}
                 </h2>
+                {/* Si el usuario inicio sesion te muestra el boton de checkout, de lo cnotrario te muestra un boton para hacer login */}
                 {localStorage.getItem("user") ? (
                   <button className="checkoutBtn" onClick={buyCart}>
                     Checkout

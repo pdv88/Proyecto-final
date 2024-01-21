@@ -1,3 +1,4 @@
+// importacion de iconos de redes sociales y react
 import React from "react";
 import facebook from '../assets/icons_assets/facebook.svg'
 import foursquare from "../assets/icons_assets/foursquare.svg";
@@ -16,13 +17,13 @@ function Footer() {
               </div>
           <div className="footer_socialsLinks">
               <div>
-                <h3>Links</h3>
+                <h2>Links</h2>
                 <p>Terms</p>
                 <p>Privacy</p>
                 <p>Compliances</p>
               </div>
             <div>
-              <h3>Socials</h3>
+              <h2>Socials</h2>
               <img src={facebook} alt="facebook" className="icons"/>
               <img src={instagram} alt="instagram" className="icons"/>
 
@@ -35,7 +36,7 @@ function Footer() {
               <img src={pinterest} alt="Pinterest" className="icons"/>
             </div>
             <div>
-              <h3>Contact Us</h3>
+              <h2>Contact Us</h2>
               <p>Tel: 54-76-87-09</p>
               <p>info@littlelemon.com</p>
             </div>

@@ -3,16 +3,18 @@ import axios from "axios";
 
 function Menu() {
 
+  // variables URL para facil cambio de local a servidor durante desarrollo
   const url = "https://little-lemon-server.onrender.com"
   // const url = 'http://localhost:3000'
   
+  // cambio de titulo del documento
   document.title = "Menu | Little Lemon";
 
   const [breakfast, setBreakfast] = useState([]);
   const [lunch, setLunch] = useState([]);
   const [dinner, setDinner] = useState([]);
 
-
+  // useEffect para obtener los platillos del servidor cuando cargue el componente
   useEffect(() => {
     axios.post(url+"/menu/breakfast").then((response) => {
       setBreakfast(response.data);
@@ -25,7 +27,7 @@ function Menu() {
     });
   }, []);
 
-
+  // funcion para hacer cards de cada platillo
   function menuMaker(dishes) {
     if (!dishes) {
       return null
@@ -47,7 +49,7 @@ function Menu() {
     });
   }
 
-
+  // funcion para agregar al carrito, si el carrito no existe se crea un archivo en el localstorage, si existe entonces se agrega el producto al carrto
   function addToCart(product) {
     let cart = localStorage.getItem("cart");
     if (!cart) {

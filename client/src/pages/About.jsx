@@ -1,8 +1,10 @@
 import React from "react";
+// importacion de imagenes 
 import aboutImg from '../assets/icons_assets/mario_adrian_a.jpg';
 import aboutImg2 from '../assets/icons_assets/mario_and_adrianb.jpg'
 
 function About() {
+  // cambio de titulo del documento
   document.title = "About | Little Lemon";
   return (
     <>

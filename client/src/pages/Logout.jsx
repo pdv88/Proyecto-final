@@ -4,33 +4,39 @@ import axios from 'axios'
 
 function Logout() {
 
+  // variables URL para facil cambio de local a servidor durante desarrollo
   const url = "https://little-lemon-server.onrender.com"
   // const url = 'http://localhost:3000'
 
+  // cambio de titulo del documento
   document.title = 'Logout | Little Lemon'
 
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem('user'))
+  // variable para mostrar el modad de eliminacion de cuenta de usuario
   const [deleteModal, setDeleteModal] = useState(false)
-
-  function closeSesion() {
-    localStorage.removeItem("user");
-    localStorage.removeItem("reservations");
-    window.location.href = "/";
-  }
-
+  // variable deinformacion de usuario
   const [updatedUser, setUpdatedUser] = useState({
     name: user.name,
     lastname: user.lastname,
     phone:user.phone,
   });
 
+  // funcion para cerrar sesion borrando los archivos user y reservations del localstorage
+  function closeSesion() {
+    localStorage.removeItem("user");
+    localStorage.removeItem("reservations");
+    window.location.href = "/";
+  }
+
+  // funcion de manejo de cambios en los inputs 
   function handleChange(e) {
     setUpdatedUser({...updatedUser, [e.target.name]:e.target.value})
   }
 
   const [errors, setErrors] = useState({})
   
+  // funcion de validacion de inputs que regresa los errores encontrados
   function validate(values){
     let errors = {}
     if (!values.name) {
@@ -47,7 +53,7 @@ function Logout() {
     return errors
   }
   
-
+  // funcion para actualizar la informacion del usuario donde se verifica primero si hay errores en los input, luego se hace la peticion con el metodo put mandando la informacion del usuario y su ID
   function handleUpdate(e){
     e.preventDefault()
     const errors = validate(updatedUser)
@@ -66,11 +72,12 @@ function Logout() {
       });
     }
   }
-
+  // funcion para abrir y cerrar el modal de eliminacion de cuenta
   function showDeleteModal(){
     setDeleteModal(!deleteModal)
   }
 
+  // funcion para borrar la cuenta de usuario usando el metodo delete y mandando la ID del usuario
   function handleAccountDelete(){
     const userId = user.id_user
       axios.delete(url+'/deleteAccount', {data: {userId:userId}}).then(response =>{
@@ -99,11 +106,11 @@ function Logout() {
           <h2>Update your Info</h2>
           <form action="" method="post"  onSubmit={handleUpdate}>
             <label htmlFor="name">Name:</label>
-            <input type="text" name="name" value={updatedUser.name} onChange={handleChange}/>
+            <input type="text" name="name" id="name" value={updatedUser.name} onChange={handleChange}/>
             <label htmlFor="lastname">Lastname:</label>
-            <input type="text" name="lastname" value={updatedUser.lastname} onChange={handleChange} />
+            <input type="text" name="lastname" id="lastname" value={updatedUser.lastname} onChange={handleChange} />
             <label htmlFor="phone">Phone:</label>
-            <input type="number" name="phone" value={updatedUser.phone} onChange={handleChange}/>
+            <input type="number" name="phone" id="phone" value={updatedUser.phone} onChange={handleChange}/>
             <input className="submitBtn" type="submit" value={'Update'}/>
           </form>
         </div>
